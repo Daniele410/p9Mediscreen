@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Mediscreen</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" type="text/css"
+        href="/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="icon" type="image/png" href="/img/favicon.ico" />
+</head>
+<body>
+
+<!-- Navigation -->
+<!--<div th:replace="fragments/general.html :: navigation"></div>-->
+
+<div class="container">
+  <div class="row py-2">
+    <div class="col-6">
+      <h2>Patients listing</h2>
+    </div>
+    <div class="col-6 text-right">
+      <a href="#" class="btn btn-success btn-lg" role="button"
+         th:href="@{/patientForm}">Create patient</a>
+    </div>
+  </div>
+
+
+  <table class="table">
+    <thead class="thead-light">
+    <tr>
+      <th class="text-left">First name</th>
+      <th class="text-left">Last name</th>
+      <th class="text-left d-none d-md-table-cell">Birthday</th>
+      <th class="text-left d-none d-md-table-cell">Gender</th>
+      <th class="text-left d-none d-md-table-cell">Address</th>
+      <th class="text-left d-none d-md-table-cell">Phone</th>
+      <th class="text-left">notes</th>
+      <th class="text-left"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="patient : ${patients}">
+      <td th:text="${patient.firstName}"></td>
+      <td th:text="${patient.lastName}"></td>
+      <td th:text="${patient.birthday}" class="d-none d-md-table-cell"></td>
+      <td th:text="${patient.gender}" class="d-none d-md-table-cell"></td>
+      <td th:text="${patient.address}" class="d-none d-md-table-cell"></td>
+      <td th:text="${patient.phone}" class="d-none d-md-table-cell"></td>
+<!--      <td>-->
+<!--        <a href="#" class="font-weight-bold" th:href="@{'/patients/{id}#notes'(id=${patient.id})}"-->
+<!--           th:text="${mapcountnote.get(patient.id)} ?: '0'">0</a>-->
+<!--      </td>-->
+      <td>
+        <form method="post" action="#" th:action="@{'/patients/delete/{id}'(id=${patient.id})}"
+              class="form-inline justify-content-end" >
+          <a href="#" class="btn btn-info" role="button" th:href="@{'/patients/{id}'(id=${patient.id})}">Select</a>
+          <button type="submit" class="btn btn-danger">
+            Delete
+          </button>
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<!-- JavaScript -->
+<script type="text/javascript" src="webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
