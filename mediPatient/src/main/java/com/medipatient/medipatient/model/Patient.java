@@ -1,5 +1,7 @@
 package com.medipatient.medipatient.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.medipatient.medipatient.constant.Gender;
 import io.swagger.annotations.ApiParam;
 
 import javax.persistence.*;
@@ -33,16 +35,18 @@ public class Patient {
 
     @ApiParam(
             value = "birthday of patient",
-            example = "10-11-1985")
+            example = "1985-11-23")
     @Column(nullable = false)
+    @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate birthday;
 
     //Gender
     @ApiParam(
             value = "birthday of patient",
-            example = "F, M")
+            example = "Male, Female")
     @Column(nullable = false)
-    private String sex;
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
 
     private String address;
 
@@ -51,12 +55,12 @@ public class Patient {
     public Patient() {
     }
 
-    public Patient(Long id, String firstName, String lastName, LocalDate birthday, String sex, String address, String phone) {
+    public Patient(Long id, String firstName, String lastName, LocalDate birthday, Gender gender, String address, String phone) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthday = birthday;
-        this.sex = sex;
+        this.gender = gender;
         this.address = address;
         this.phone = phone;
     }
@@ -93,12 +97,12 @@ public class Patient {
         this.birthday = birthday;
     }
 
-    public String getSex() {
-        return sex;
+    public Gender getGender() {
+        return gender;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex;
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 
     public String getAddress() {

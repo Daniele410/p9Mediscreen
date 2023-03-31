@@ -42,6 +42,12 @@ public class PatientController {
         return new ResponseEntity<>(patientService.findById(id), OK);
     }
 
+    @PutMapping("/patient")
+    public ResponseEntity<Patient> updatePatient(@RequestBody @Valid Patient patient) throws UserNotFoundException {
+        log.info("update patient whit id :{} ", patient.getId());
+        return new ResponseEntity<>(patientService.updatePatient(patient), OK );
+    }
+
     @PostMapping("/patient")
     public ResponseEntity<Patient> addPatient(@RequestBody @Valid Patient patient) {
         log.info("save patient :{} {} request", patient.getFirstName(), patient.getLastName());

@@ -30,18 +30,26 @@ public class PatientService implements IPatientService {
     @Override
     public Patient findById(long id) throws UserNotFoundException {
         log.info("get patient by id: {}", id);
-        return patientRepository.findById(id).orElseThrow(()-> new UserNotFoundException("id user: {} " + id + " not found!"));
+        return patientRepository.findById(id).orElseThrow(()->
+                new UserNotFoundException("id user: {} " + id + " not found!"));
     }
 
     @Override
     public Patient savePatient(Patient patient) {
-        log.info("save patient: {} {}", patient.getFirstName(),patient.getLastName());
+        log.info("save patient: {} {}" + patient.getFirstName(),patient.getLastName());
         return patientRepository.save(patient);
     }
 
     @Override
+    public Patient updatePatient(Patient patient) throws UserNotFoundException {
+        log.info("update patient: {} {}" + patient.getFirstName(), patient.getLastName());
+        Patient patientUpdate = findById(patient.getId());
+        return patientRepository.save(patientUpdate);
+    }
+
+    @Override
     public Patient deletePatient(long id) throws UserNotFoundException {
-        log.info("patient with: {} ", id , " update");
+        log.info("patient with: {} " + id , " update");
         Patient patientToDelete = findById(id);
         patientRepository.delete(patientToDelete);
         return patientToDelete;

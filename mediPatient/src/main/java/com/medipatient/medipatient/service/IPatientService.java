@@ -12,5 +12,7 @@ public interface IPatientService {
 
     Patient savePatient(Patient patient);
 
+    Patient updatePatient(Patient patient) throws UserNotFoundException;
+
     Patient deletePatient(long id) throws UserNotFoundException;
 }
