@@ -43,7 +43,8 @@ public class PatientServiceImpl implements IPatientService {
     @Override
     public Patient updatePatient(Patient patient) throws UserNotFoundException {
         log.info("update patient: {} {}" + patient.getFirstName(), patient.getLastName());
-        Patient patientUpdate = findById(patient.getId());
+        patientRepository.findById(patient.getId()).orElseThrow(()->
+                new UserNotFoundException("id user: {} " + patient.getId() + " not found!"));
         return patientRepository.save(patient);
     }
 
