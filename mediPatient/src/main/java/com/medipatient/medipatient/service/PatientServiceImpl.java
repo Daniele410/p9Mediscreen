@@ -11,13 +11,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class PatientService implements IPatientService {
+public class PatientServiceImpl implements IPatientService {
 
-    private final Logger log = LoggerFactory.getLogger(PatientService.class);
+    private final Logger log = LoggerFactory.getLogger(PatientServiceImpl.class);
     public final PatientRepository patientRepository;
 
     @Autowired
-    public PatientService(PatientRepository patientRepository) {
+    public PatientServiceImpl(PatientRepository patientRepository) {
         this.patientRepository = patientRepository;
     }
 
@@ -44,7 +44,7 @@ public class PatientService implements IPatientService {
     public Patient updatePatient(Patient patient) throws UserNotFoundException {
         log.info("update patient: {} {}" + patient.getFirstName(), patient.getLastName());
         Patient patientUpdate = findById(patient.getId());
-        return patientRepository.save(patientUpdate);
+        return patientRepository.save(patient);
     }
 
     @Override

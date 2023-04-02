@@ -3,11 +3,10 @@ package com.medipatient.medipatient.controller;
 import com.medipatient.medipatient.Exception.UserNotFoundException;
 import com.medipatient.medipatient.model.Patient;
 import com.medipatient.medipatient.service.IPatientService;
-import com.medipatient.medipatient.service.PatientService;
+import com.medipatient.medipatient.service.PatientServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -25,8 +24,8 @@ public class PatientController {
     private final IPatientService patientService;
 
     @Autowired
-    public PatientController(PatientService patientService) {
-        this.patientService = patientService;
+    public PatientController(PatientServiceImpl patientServiceImpl) {
+        this.patientService = patientServiceImpl;
     }
 
 
@@ -44,13 +43,13 @@ public class PatientController {
 
     @PutMapping("/patient")
     public ResponseEntity<Patient> updatePatient(@RequestBody @Valid Patient patient) throws UserNotFoundException {
-        log.info("update patient whit id :{} ", patient.getId());
+        log.info("update patient with id :{} ", patient.getId());
         return new ResponseEntity<>(patientService.updatePatient(patient), OK );
     }
 
     @PostMapping("/patient")
     public ResponseEntity<Patient> addPatient(@RequestBody @Valid Patient patient) {
-        log.info("save patient :{} {} request", patient.getFirstName(), patient.getLastName());
+        log.info("save patient :{} {}", patient.getFirstName(), patient.getLastName());
         return new ResponseEntity<>(patientService.savePatient(patient), CREATED);
     }
 

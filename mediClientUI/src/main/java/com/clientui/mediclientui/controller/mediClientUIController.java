@@ -18,13 +18,13 @@ public class mediClientUIController {
     }
 
 
-//    @GetMapping("/HomePage")
-//    public String accueil(Model model){
-//        return "HomePage";
-//    }
+    @GetMapping("/")
+    public String homePage(Model model){
+        return "HomePage";
+    }
 
     @GetMapping("/patients")
-    public String homePage(Model model){
+    public String patients(Model model){
         List<PatientBean> patients =  patientProxy.patientsBeanList();
         model.addAttribute("patients", patients);
 
