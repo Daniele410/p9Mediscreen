@@ -16,11 +16,19 @@ import java.util.List;
 
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
-
+/**
+ * PatientController
+ */
 @Controller
 public class PatientController {
-
+    /**
+     * SLF4J Logger instance.
+     */
     private final Logger log = LoggerFactory.getLogger(PatientController.class);
+
+    /**
+     * Instance of IPatientService
+     */
     private final IPatientService patientService;
 
     @Autowired
@@ -29,30 +37,55 @@ public class PatientController {
     }
 
 
+    /**
+     * method to get all patients
+     * @return all patients
+     */
     @GetMapping("/patients")
     public ResponseEntity<List<Patient>> getAllPatients() {
         log.info("get all patients");
         return new ResponseEntity<>(patientService.getAllPatients(), OK);
     }
 
+    /**
+     * @param id
+     * @return patient
+     * @throws UserNotFoundException
+     */
     @GetMapping("/patient")
     public ResponseEntity<Patient> getPatientById(@RequestParam Long id) throws UserNotFoundException {
         log.info("get patient by id :{} ", id);
         return new ResponseEntity<>(patientService.findById(id), OK);
     }
 
+    /**
+     * put method to upload user
+     * @param patient
+     * @return patient update
+     */
     @PutMapping("/patient")
     public ResponseEntity<Patient> updatePatient(@RequestBody @Valid Patient patient) throws UserNotFoundException {
         log.info("update patient with id :{} ", patient.getId());
         return new ResponseEntity<>(patientService.updatePatient(patient), OK );
     }
 
+    /**
+     * post method to add patient
+     * @param  patient
+     * @return patient
+     */
     @PostMapping("/patient")
     public ResponseEntity<Patient> addPatient(@RequestBody @Valid Patient patient) {
         log.info("save patient :{} {}", patient.getFirstName(), patient.getLastName());
         return new ResponseEntity<>(patientService.savePatient(patient), CREATED);
     }
 
+    /**
+     * delete method to delete patient by id
+     * @param id
+     * @return OK
+     * @throws DataNotFoundException
+     */
     @DeleteMapping
     public ResponseEntity<Patient> deletePatient(@RequestParam @Valid long id) throws UserNotFoundException {
         log.info("remove patient with id:{}", id);
