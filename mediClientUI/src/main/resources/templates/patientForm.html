@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Mediscreen</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/custom.css">
+    <link rel="icon" type="image/png" href="/img/favicon.ico"/>
+</head>
+<body>
+
+<!-- Navigation -->
+<div th:replace="fragments/general.html :: navigation"></div>
+
+<div class="container">
+    <form action="#" method="post" th:action="@{/patientForm}" th:object="${patient}">
+        <h2 class="mt-4">Patient form</h2>
+        <hr/>
+        <!-- Form levels error messages here -->
+        <div class="form-group row ">
+            <div class="col-sm-8">
+                <span class="text-danger"> </span>
+            </div>
+        </div>
+
+        <!-- patient.id if already exists -->
+        <input type="hidden" th:field="*{id}"/>
+
+        <div class="form-group row ">
+            <label class="col-sm-2 col-form-label">First name</label>
+            <div class="col-sm-4">
+                <input th:field="*{firstName}" type="text" class="form-control" placeholder="Mandatory">
+            </div>
+            <div class="col-sm-4">
+                <span class="text-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
+            </div>
+        </div>
+
+
+        <div class="form-group row ">
+            <label class="col-sm-2 col-form-label">Last name</label>
+            <div class="col-sm-4">
+                <input th:field="*{lastName}" type="text" class="form-control" placeholder="Mandatory">
+            </div>
+            <div class="col-sm-4">
+                <span class="text-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
+            </div>
+        </div>
+
+        <div class="form-group row ">
+            <label class="col-sm-2 col-form-label">Date of birth</label>
+            <div class="col-sm-4">
+                <input th:field="*{birthday}" type="date" class="form-control" placeholder="Mandatory">
+            </div>
+            <div class="col-sm-4">
+                <span class="text-danger" th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}"></span>
+            </div>
+        </div>
+
+        <div class="form-group row ">
+            <label class="col-sm-2 col-form-label mr-0">Sex</label>
+            <div class="col-sm-4">
+                <input th:field="*{gender}" type="radio" name="gender" value="M" id="Male"/> <label for="Male">Male</label>
+                <input th:field="*{gender}" type="radio" name="gender" value="F" id="Female"/> <label
+                    for="female">Female</label>
+            </div>
+            <div class="col-sm-4">
+                <span class="text-danger" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></span>
+            </div>
+        </div>
+
+        <div class="form-group row ">
+            <label class="col-sm-2 col-form-label">Address</label>
+            <div class="col-sm-4">
+                <input th:field="*{address}" type="text" class="form-control">
+            </div>
+            <div class="col-sm-4">
+                <span class="text-danger" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
+            </div>
+        </div>
+
+        <div class="form-group row ">
+            <label class="col-sm-2 col-form-label">Phone</label>
+            <div class="col-sm-4">
+                <input th:field="*{phone}" type="text" class="form-control">
+            </div>
+            <div class="col-sm-4">
+                <span class="text-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                <a href="#" class="btn btn-danger" role="button"
+                   th:href="@{/patients} + ( ${patient.id != null} ? '/'+${patient.id} : '' )">Cancel</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- Footer -->
+<div th:replace="fragments/general.html :: footer"></div>
+
+<script src="/webjars/jquery/3.6.0/jquery.slim.min.js"></script>
+<script type="text/javascript"
+        src="/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

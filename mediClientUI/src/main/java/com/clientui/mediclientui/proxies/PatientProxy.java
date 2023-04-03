@@ -14,7 +14,7 @@ public interface PatientProxy {
     List<PatientBean> patientsBeanList();
 
     @GetMapping( value = "/patient/{id}")
-    Patient patient(@PathVariable("id") int id);
+    Patient getPatient(@PathVariable("id") int id);
 
 
     @PutMapping( value = "/patient")

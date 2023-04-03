@@ -48,27 +48,41 @@
       <td th:text="${patient.gender}" class="d-none d-md-table-cell"></td>
       <td th:text="${patient.address}" class="d-none d-md-table-cell"></td>
       <td th:text="${patient.phone}" class="d-none d-md-table-cell"></td>
+
+      <td>
+      <a th:href="@{/patient/note/{id}(id=${patient.id})}" class="btn btn-info">Note</a>
+      </td>
+
+      <td style="width: 15%" class="text-center">
+        <a th:href="@{/patient/update/{id}(id=${patient.id})}" class="btn btn-info">Edit</a>
+        <a th:href="@{/patient/delete/{id}(id=${patient.id})}" class="btn btn-danger">Delete</a>
+      </td>
 <!--      <td>-->
 <!--        <a href="#" class="font-weight-bold" th:href="@{'/patients/{id}#notes'(id=${patient.id})}"-->
 <!--           th:text="${mapcountnote.get(patient.id)} ?: '0'">0</a>-->
 <!--      </td>-->
-      <td>
-        <form method="post" action="#" th:action="@{'/patients/delete/{id}'(id=${patient.id})}"
-              class="form-inline justify-content-end" >
-          <a href="#" class="btn btn-info" role="button" th:href="@{'/patients/{id}'(id=${patient.id})}">Select</a>
-          <button type="submit" class="btn btn-danger">
-            Delete
-          </button>
-        </form>
-      </td>
+<!--      <td>-->
+<!--        <form method="post" action="#" th:action="@{'/patients/delete/{id}'(id=${patient.id})}"-->
+<!--              class="form-inline justify-content-end" >-->
+<!--          <a href="#" class="btn btn-info" role="button" th:href="@{'/patients/{id}'(id=${patient.id})}">Select</a>-->
+<!--          <button type="submit" class="btn btn-danger">-->
+<!--            Delete-->
+<!--          </button>-->
+<!--        </form>-->
+<!--      </td>-->
     </tr>
     </tbody>
   </table>
 
 </div>
 
+<!-- Footer -->
+<div th:replace="fragments/general.html :: footer"></div>
+
 <!-- JavaScript -->
-<script type="text/javascript" src="webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
+<script src="/webjars/jquery/3.6.0/jquery.slim.min.js"></script>
+<script type="text/javascript"
+        src="/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
 
 </body>
 </html>

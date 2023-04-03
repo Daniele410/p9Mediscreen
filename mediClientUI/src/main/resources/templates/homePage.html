@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Mediscreen</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/custom.css">
+    <link rel="icon" type="image/png" href="/img/favicon.ico"/>
+
+</head>
+<body>
+
+
+<!-- Navigation -->
+<!--<div th:replace="fragments/general.html :: navigation"></div>-->
+<div class="bg-light mt-1" th:fragment="header">
+    <div class="container">
+        <div class="row pt-4 pb-3">
+            <div class="col">
+                <ul class="list-inline align-content-lg-start font-weight-bold">
+                    <li class="list-inline-item"><img src="/img/img.png" alt="Image" style="width:50px;height:60px;">
+                    </li>
+                    <li class="list-inline-item"><a>Mediscreen</a></li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-md-12 order-lg-2 col-lg-9 px-0">
+            <img src="/img/mediscreen-people.png" class="img-fluid"
+                 alt="PayMyBuddy logo">
+        </div>
+        <div class="col-12 col-md-12 order-lg-1 col-lg-3 px-1 pt-2 text-center">
+            <p>
+            <ul class="list-inline text-center font-weight-bold">
+                <li class="list-inline-item"><a href="/">HOME</a></li>
+
+                <li class="list-inline-item"><a href="/patients">PATIENTS</a></li>
+            </ul>
+            </p>
+            <p>
+            <h2 class="text-primary text-bold">We care.</h2><br>
+            Mediscreen specializes in detecting risk factors for disease.
+            Our screenings using predictive analysis of patient populations at
+            an affordable cost.
+            </p>
+            <ul>
+                <li>Are you a small or rural clinic or practice?</li>
+                <li>Do you need screenings for heart disease or hypertension precursors?</li>
+            </ul>
+            <h4 class="text-primary text-bold">We have a solution for you.</h4>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Footer -->
+<div class="bg-light mt-5" th:fragment="footer">
+    <div class="container">
+        <div class="row pt-4 pb-3">
+            <div class="col">
+                <ul class="list-inline text-center font-weight-bold">
+                    <li class="list-inline-item"><a href="#">About us</a></li>
+                    <li class="list-inline-item">&middot;</li>
+                    <li class="list-inline-item"><a href="#">Privacy And
+                        Policy</a></li>
+                    <li class="list-inline-item">&middot;</li>
+                    <li class="list-inline-item"><a href="#">Terms and
+                        Conditions</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+</html>
