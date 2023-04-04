@@ -29,4 +29,6 @@ public interface PatientProxy {
     public void deletePatient(@PathVariable long id);
 
 
+
+
 }

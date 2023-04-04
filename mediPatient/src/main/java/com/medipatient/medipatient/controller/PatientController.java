@@ -52,8 +52,14 @@ public class PatientController {
      * @return patient
      * @throws UserNotFoundException
      */
+    @GetMapping("/patient")
+    public ResponseEntity<Patient> getPatientById( @RequestParam Long id) throws UserNotFoundException {
+        log.info("get patient by id :{} ", id);
+        return new ResponseEntity<>(patientService.findById(id), OK);
+    }
+
     @GetMapping("/patient/{id}")
-    public ResponseEntity<Patient> getPatientById(@PathVariable @RequestParam Long id) throws UserNotFoundException {
+    public ResponseEntity<Patient> getPatientByIdForUi(@PathVariable @RequestParam Long id) throws UserNotFoundException {
         log.info("get patient by id :{} ", id);
         return new ResponseEntity<>(patientService.findById(id), OK);
     }
