@@ -92,7 +92,7 @@ class PatientControllerTest {
     }
 
     @Test
-    void updatePatient() throws UserNotFoundException {
+    void updatePatientShouldReturnModifiedModelAndView() throws UserNotFoundException {
         //Given
         List<Patient> patientsList = new ArrayList<>();
         Patient patient = new Patient(1L, "Piero", "Brow", LocalDate.of(1084, 9, 10), Gender.MALE, "St Toto", "213213213213");
@@ -110,7 +110,7 @@ class PatientControllerTest {
     }
 
     @Test
-    void addPatient() throws UserNotFoundException {
+    void addPatientShouldReturnModifiedModelAndView() throws UserNotFoundException {
         //Given
         List<Patient> patientsList = new ArrayList<>();
         Patient patient = new Patient(1L, "Piero", "Brow", LocalDate.of(1084, 9, 10), Gender.MALE, "St Toto", "213213213213");
@@ -128,7 +128,7 @@ class PatientControllerTest {
     }
 
     @Test
-    void deletePatient() throws UserNotFoundException {
+    void deletePatientShouldReturnModifiedModelAndView() throws UserNotFoundException {
         //Given
         List<Patient> patientsList = new ArrayList<>();
         Patient patient = new Patient(1L, "Piero", "Brow", LocalDate.of(1084, 9, 10), Gender.MALE, "St Toto", "213213213213");
@@ -144,4 +144,29 @@ class PatientControllerTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(patient, response.getBody());
     }
+
+    @Test
+    void deletePatientShouldReturnModifiedModelAndView2() throws UserNotFoundException {
+        //Given
+        List<Patient> patientsList = new ArrayList<>();
+        Patient patient = new Patient();
+        patient.setId(1L);
+        patient.setFirstName("Piero");
+        patient.setLastName("Brow");
+        patient.setBirthday(LocalDate.of(1084, 9, 10));
+        patient.setGender(Gender.MALE);
+        patient.setAddress("St Toto");
+        patient.setPhone("123123123");
+        patientsList.add(patient);
+        patientsList.add(patient);
+        when(patientService.deletePatient(1L)).thenReturn(patient);
+
+        //When
+        ResponseEntity<Patient> response = patientController.deletePatient(1L);
+
+        //Then
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(patient, response.getBody());
+    }
+
 }
