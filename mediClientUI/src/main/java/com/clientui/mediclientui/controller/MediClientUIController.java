@@ -2,11 +2,9 @@ package com.clientui.mediclientui.controller;
 
 import com.clientui.mediclientui.beans.PatientBean;
 import com.clientui.mediclientui.proxies.PatientProxy;
-import com.medipatient.medipatient.Exception.UserNotFoundException;
 import com.medipatient.medipatient.model.Patient;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,8 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-
-import static org.springframework.http.HttpStatus.OK;
 
 @Controller
 public class MediClientUIController {
@@ -30,22 +26,21 @@ public class MediClientUIController {
 
 
     @GetMapping("/")
-    public String homePage(Model model){
+    public String homePage(Model model) {
         return "homePage";
     }
 
     @GetMapping("/patients")
-    public String patients(Model model){
-        List<PatientBean> patients =  patientProxy.patientsBeanList();
+    public String patients(Model model) {
+        List<PatientBean> patients = patientProxy.patientsBeanList();
         model.addAttribute("patients", patients);
-
 
 
         return "patients";
     }
 
     @GetMapping("/patientForm")
-    public String showAddPersonForm(PatientBean patientBean,Model model) {
+    public String showAddPersonForm(PatientBean patientBean, Model model) {
         model.addAttribute("patient", new PatientBean());
         return "patientForm";
     }
@@ -56,14 +51,14 @@ public class MediClientUIController {
         if (bindingResult.hasErrors()) {
             return "redirect:/patientForm?error";
         }
-            patientProxy.createPatient(patientBean);
-            logger.info("save patient");
-            return "redirect:/patients?success";
+        patientProxy.createPatient(patientBean);
+        logger.info("save patient");
+        return "redirect:/patients?success";
 
     }
 
     @GetMapping(value = "/patientUpdateForm/{id}")
-    public String showUpdateForm(@PathVariable("id") Integer id,Model model) {
+    public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         logger.debug("get request patient/update/{}", id);
         Patient patient = patientProxy.getPatient(id);
 
@@ -72,7 +67,7 @@ public class MediClientUIController {
     }
 
     @PostMapping(value = "/patientUpdateForm/{id}")
-    public String updatePatient(@PathVariable ("id") long id, @RequestBody @ModelAttribute("patient") PatientBean patientBean, BindingResult bindingResult,Model model) {
+    public String updatePatient(@PathVariable("id") long id, @RequestBody @ModelAttribute("patient") PatientBean patientBean, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "redirect:/patientUpdate?error";
         }
@@ -84,7 +79,6 @@ public class MediClientUIController {
     }
 
 
-
     @GetMapping(value = "/patientDelete/{id}")
     public String deleteUser(@PathVariable("id") long id, Model model) {
         logger.debug("delete request /delete/{}", id);
@@ -92,7 +86,6 @@ public class MediClientUIController {
         model.addAttribute("patient", patientProxy.patientsBeanList());
         return "redirect:/patients";
     }
-
 
 
 }

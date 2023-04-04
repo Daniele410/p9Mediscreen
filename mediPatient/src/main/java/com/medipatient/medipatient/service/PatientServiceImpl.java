@@ -50,7 +50,7 @@ public class PatientServiceImpl implements IPatientService {
 
     @Override
     public Patient deletePatient(long id) throws UserNotFoundException {
-        log.info("patient with: {} " + id , " update");
+        log.info("patient with: {} " + id , " delete");
         Patient patientToDelete = findById(id);
         patientRepository.delete(patientToDelete);
         return patientToDelete;
