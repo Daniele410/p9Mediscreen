@@ -14,14 +14,14 @@ public interface PatientProxy {
     List<PatientBean> patientsBeanList();
 
     @GetMapping( value = "/patient/{id}")
-    Patient getPatient(@PathVariable("id") int id);
+    Patient getPatient(@RequestParam @PathVariable("id") int id);
 
 
     @PutMapping( value = "/patient")
     public PatientBean updatePatient(@RequestBody PatientBean updatedPatient);
 
 
-    @PostMapping( value = "/patient/add")
+    @PostMapping( value = "/patient")
     public PatientBean createPatient(@RequestBody PatientBean patient);
 
 

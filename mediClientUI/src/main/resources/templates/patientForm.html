@@ -14,7 +14,7 @@
 <div th:replace="fragments/general.html :: navigation"></div>
 
 <div class="container">
-    <form action="#" method="post" th:action="@{/patientForm}" th:object="${patient}">
+    <form th:action="@{/patientForm}" th:object="${patient}" method="post">
         <h2 class="mt-4">Patient form</h2>
         <hr/>
         <!-- Form levels error messages here -->
@@ -24,8 +24,20 @@
             </div>
         </div>
 
-        <!-- patient.id if already exists -->
-        <input type="hidden" th:field="*{id}"/>
+        <!-- success message -->
+        <div th:if="${param.success}">
+            <div class="alert alert-info">You've successfully registered
+                your patient!!
+            </div>
+        </div>
+
+        <!-- error message -->
+        <div>
+            <div th:if="${param.error}">
+                <div class="alert alert-danger">Invalid Patient!
+                </div>
+            </div>
+        </div>
 
         <div class="form-group row ">
             <label class="col-sm-2 col-form-label">First name</label>
@@ -49,21 +61,24 @@
         </div>
 
         <div class="form-group row ">
-            <label class="col-sm-2 col-form-label">Date of birth</label>
+            <label class="col-sm-2 col-form-label">Date of birthday</label>
             <div class="col-sm-4">
-                <input th:field="*{birthday}" type="date" class="form-control" placeholder="Mandatory">
+                <input type="date"  th:field= "*{birthday}" class="form-control" placeholder="Mandatory" >
+
             </div>
             <div class="col-sm-4">
                 <span class="text-danger" th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}"></span>
             </div>
         </div>
 
+
+
         <div class="form-group row ">
             <label class="col-sm-2 col-form-label mr-0">Sex</label>
             <div class="col-sm-4">
-                <input th:field="*{gender}" type="radio" name="gender" value="M" id="Male"/> <label for="Male">Male</label>
-                <input th:field="*{gender}" type="radio" name="gender" value="F" id="Female"/> <label
-                    for="female">Female</label>
+                <input th:field="${patient.gender}" type="radio" name="gender" value="MALE" id="MALE"/> <label for="Male">Male</label>
+                <input th:field="${patient.gender}" type="radio" name="gender" value="FEMALE" id="FEMALE"/> <label
+                    for="Female">Female</label>
             </div>
             <div class="col-sm-4">
                 <span class="text-danger" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></span>
@@ -73,17 +88,17 @@
         <div class="form-group row ">
             <label class="col-sm-2 col-form-label">Address</label>
             <div class="col-sm-4">
-                <input th:field="*{address}" type="text" class="form-control">
+                <input th:field="*{address}" type="text" class="form-control" placeholder="Mandatory">
             </div>
             <div class="col-sm-4">
-                <span class="text-danger" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
+                <span class="text-danger" th:if="${#fields.hasErrors('address')}" th:errors="*{address}" ></span>
             </div>
         </div>
 
         <div class="form-group row ">
             <label class="col-sm-2 col-form-label">Phone</label>
             <div class="col-sm-4">
-                <input th:field="*{phone}" type="text" class="form-control">
+                <input th:field="*{phone}" type="text" class="form-control" placeholder="Mandatory">
             </div>
             <div class="col-sm-4">
                 <span class="text-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span>
@@ -93,7 +108,7 @@
             <div class="col-sm-10">
                 <button type="submit" class="btn btn-primary mr-2">Submit</button>
                 <a href="#" class="btn btn-danger" role="button"
-                   th:href="@{/patients} + ( ${patient.id != null} ? '/'+${patient.id} : '' )">Cancel</a>
+                   th:href="@{/patients}">Cancel</a>
             </div>
         </div>
     </form>
@@ -105,6 +120,11 @@
 <script src="/webjars/jquery/3.6.0/jquery.slim.min.js"></script>
 <script type="text/javascript"
         src="/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 
 </body>
 </html>

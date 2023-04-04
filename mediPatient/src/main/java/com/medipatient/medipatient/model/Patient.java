@@ -1,11 +1,11 @@
 package com.medipatient.medipatient.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.medipatient.medipatient.constant.Gender;
 import io.swagger.annotations.ApiParam;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
@@ -37,12 +37,13 @@ public class Patient {
             value = "birthday of patient",
             example = "1985-11-23")
     @Column(nullable = false)
-    @JsonFormat(pattern="yyyy-MM-dd")
+//    @JsonFormat(pattern="yyyy-MM-dd")
+    @NotNull
     private LocalDate birthday;
 
     //Gender
     @ApiParam(
-            value = "birthday of patient",
+            value = "gender of patient's",
             example = "Male, Female")
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -119,5 +120,19 @@ public class Patient {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Patient{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", birthday=" + birthday +
+                ", gender=" + gender +
+                ", address='" + address + '\'' +
+                ", phone='" + phone + '\'' +
+                '}';
     }
 }

@@ -1,20 +1,40 @@
 package com.clientui.mediclientui.beans;
 
 import com.medipatient.medipatient.constant.Gender;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 public class PatientBean {
 
     private Long id;
+    @NotBlank
+    @Size(min=1,max=50)
     private String firstName;
+    @NotBlank
+    @Size(min=1,max=100)
     private String lastName;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthday;
     private Gender gender;
+    @Size(min=0,max=150)
     private String address;
+    @Size(min=0,max=20)
     private String phone;
 
     public PatientBean() {
+    }
+
+    public PatientBean(Long id, String firstName, String lastName, LocalDate birthday, Gender gender, String address, String phone) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthday = birthday;
+        this.gender = gender;
+        this.address = address;
+        this.phone = phone;
     }
 
     public Long getId() {
