@@ -69,12 +69,12 @@ public class MediClientUIController {
 
 
 
-    @GetMapping("/delete/{id}")
-    public String deleteUser(@PathVariable("id") Integer id, Model model) {
+    @GetMapping(value = "/patientDelete/{id}")
+    public String deleteUser(@PathVariable("id") long id, Model model) {
         logger.debug("delete request /delete/{}", id);
         patientProxy.deletePatient(id);
         model.addAttribute("patient", patientProxy.patientsBeanList());
-        return "redirect: /patients";
+        return "redirect:/patients";
     }
 
 

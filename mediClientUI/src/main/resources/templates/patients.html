@@ -81,9 +81,9 @@
       </td>
 
       <td style="width: 15%" class="text-center">
-<!--        <a th:href="@{/patientUpdateForm(patientId=${patient.id})}" class="btn btn-info">Update</a>-->
+
         <a th:href="@{/patientUpdateForm/{id}(id=${patient.id})}" class="btn btn-info">Edit</a>
-        <a th:href="@{/patientDelete/{id}(id=${patient.id})}" class="btn btn-danger">Delete</a>
+        <a th:href="@{/patientDelete/{id}(id=${patient.id})}" class="btn btn-danger">Delete </a>
       </td>
 
     </tr>

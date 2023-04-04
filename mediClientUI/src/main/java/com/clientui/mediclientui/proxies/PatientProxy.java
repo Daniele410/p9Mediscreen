@@ -25,8 +25,8 @@ public interface PatientProxy {
     public PatientBean createPatient(@RequestBody PatientBean patient);
 
 
-    @DeleteMapping( value = "/patient/delete/{id}")
-    public void deletePatient(@PathVariable Integer id);
+    @GetMapping( value = "/patientDelete/{id}")
+    public void deletePatient(@PathVariable long id);
 
 
 }

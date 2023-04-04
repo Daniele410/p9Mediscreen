@@ -86,8 +86,8 @@ public class PatientController {
      * @return OK
      * @throws UserNotFoundException
      */
-    @DeleteMapping
-    public ResponseEntity<Patient> deletePatient(@RequestParam @Valid long id) throws UserNotFoundException {
+    @GetMapping(value = "/patientDelete/{id}")
+    public ResponseEntity<Patient> deletePatient(@PathVariable long id) throws UserNotFoundException {
         log.info("remove patient with id:{}", id);
         return new ResponseEntity<>(patientService.deletePatient(id), OK);
     }
