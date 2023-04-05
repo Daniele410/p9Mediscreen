@@ -26,22 +26,24 @@ public class MediClientUIController {
 
 
     @GetMapping("/")
-    public String homePage(Model model) {
+    public String homePage() {
         return "homePage";
     }
 
     @GetMapping("/patients")
-    public String patients(Model model) {
+    public String showPatients(Model model) {
         List<PatientBean> patients = patientProxy.patientsBeanList();
         model.addAttribute("patients", patients);
 
+        //add Note
 
         return "patients";
     }
 
     @GetMapping("/patientForm")
-    public String showAddPersonForm(PatientBean patientBean, Model model) {
+    public String showAddPatientForm(PatientBean patientBean, Model model) {
         model.addAttribute("patient", new PatientBean());
+        logger.info("show add PatientForm");
         return "patientForm";
     }
 
@@ -58,10 +60,10 @@ public class MediClientUIController {
     }
 
     @GetMapping(value = "/patientUpdateForm/{id}")
-    public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
+    public String showUpdateForm(@PathVariable("id") long id, Model model) {
         logger.debug("get request patient/update/{}", id);
         Patient patient = patientProxy.getPatient(id);
-
+        logger.info("show updatePatient form");
         model.addAttribute("patient", patient);
         return "patientUpdateForm";
     }
@@ -80,7 +82,7 @@ public class MediClientUIController {
 
 
     @GetMapping(value = "/patientDelete/{id}")
-    public String deleteUser(@PathVariable("id") long id, Model model) {
+    public String deletePatient(@PathVariable("id") long id, Model model) {
         logger.debug("delete request /delete/{}", id);
         patientProxy.deletePatient(id);
         model.addAttribute("patient", patientProxy.patientsBeanList());

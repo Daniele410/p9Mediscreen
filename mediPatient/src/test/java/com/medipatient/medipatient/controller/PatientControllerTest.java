@@ -43,7 +43,7 @@ class PatientControllerTest {
         Patient patient = new Patient(1L, "Piero", "Brow", LocalDate.of(1084, 9, 10), Gender.MALE, "St Toto", "213213213213");
         Patient patient1 = new Patient(2L, "Mario", "Rossi", LocalDate.of(1988, 8, 15), Gender.MALE, "St Tata", "123123123123");
         patientsList.add(patient);
-        patientsList.add(patient);
+        patientsList.add(patient1);
         when(patientService.getAllPatients()).thenReturn(patientsList);
 
         //When
