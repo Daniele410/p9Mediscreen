@@ -65,7 +65,7 @@ public class PatientController {
     }
 
     /**
-     * put method to upload user
+     * put method to upload patient
      * @param patient
      * @return patient update
      */
