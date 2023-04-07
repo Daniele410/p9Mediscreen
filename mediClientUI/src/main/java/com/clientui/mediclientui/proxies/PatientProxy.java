@@ -1,7 +1,6 @@
 package com.clientui.mediclientui.proxies;
 
 import com.clientui.mediclientui.beans.PatientBean;
-import com.medipatient.medipatient.model.Patient;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +13,7 @@ public interface PatientProxy {
     List<PatientBean> patientsBeanList();
 
     @GetMapping( value = "/patient/{id}")
-    Patient getPatient(@RequestParam @PathVariable("id") long id);
+    PatientBean getPatient(@RequestParam @PathVariable("id") long id);
 
 
     @PutMapping( value = "/patient")

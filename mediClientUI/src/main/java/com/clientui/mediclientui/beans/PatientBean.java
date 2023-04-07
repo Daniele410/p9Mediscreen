@@ -1,6 +1,7 @@
 package com.clientui.mediclientui.beans;
 
-import com.medipatient.medipatient.constant.Gender;
+
+import com.clientui.mediclientui.constant.Gender;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotBlank;

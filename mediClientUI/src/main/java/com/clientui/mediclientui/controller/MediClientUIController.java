@@ -2,7 +2,6 @@ package com.clientui.mediclientui.controller;
 
 import com.clientui.mediclientui.beans.PatientBean;
 import com.clientui.mediclientui.proxies.PatientProxy;
-import com.medipatient.medipatient.model.Patient;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -62,7 +61,7 @@ public class MediClientUIController {
     @GetMapping(value = "/patientUpdateForm/{id}")
     public String showUpdateForm(@PathVariable("id") long id, Model model) {
         logger.debug("get request patient/update/{}", id);
-        Patient patient = patientProxy.getPatient(id);
+        PatientBean patient = patientProxy.getPatient(id);
         logger.info("show updatePatient form");
         model.addAttribute("patient", patient);
         return "patientUpdateForm";

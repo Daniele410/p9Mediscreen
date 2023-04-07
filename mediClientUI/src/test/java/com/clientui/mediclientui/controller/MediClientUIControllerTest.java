@@ -1,17 +1,14 @@
 package com.clientui.mediclientui.controller;
 
 import com.clientui.mediclientui.beans.PatientBean;
+import com.clientui.mediclientui.constant.Gender;
 import com.clientui.mediclientui.proxies.PatientProxy;
-import com.medipatient.medipatient.constant.Gender;
-import com.medipatient.medipatient.model.Patient;
 import io.swagger.models.Model;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 
 import java.time.LocalDate;
@@ -19,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -85,7 +81,14 @@ class MediClientUIControllerTest {
     void registerPatientShouldReturnModifiedModelAndView_ValidData() {
 
         //Given
-        PatientBean patient = new PatientBean(1L, "Piero", "Brow", LocalDate.of(1084, 9, 10), Gender.MALE, "St Toto", "213213213213");
+        PatientBean patient = new PatientBean();
+        patient.setId(1L);
+        patient.setFirstName("Piero");
+        patient.setLastName("Brow");
+        patient.setBirthday(LocalDate.of(1084, 9, 10));
+        patient.setGender(Gender.MALE);
+        patient.setAddress("St Toto");
+        patient.setPhone("213213213213");
         when(bindingResult.hasErrors()).thenReturn(false);
         when(patientProxy.createPatient(patient)).thenReturn(patient);
 
@@ -118,7 +121,7 @@ class MediClientUIControllerTest {
     @Test
     void showUpdateFormShouldReturnModifiedModelAndView() {
         //Given
-        Patient patient = new Patient(1L, "Piero", "Brow", LocalDate.of(1084, 9, 10), Gender.MALE, "St Toto", "213213213213");
+        PatientBean patient = new PatientBean(1L, "Piero", "Brow", LocalDate.of(1084, 9, 10), Gender.MALE, "St Toto", "213213213213");
 
         when(patientProxy.getPatient(1)).thenReturn(patient);
 
