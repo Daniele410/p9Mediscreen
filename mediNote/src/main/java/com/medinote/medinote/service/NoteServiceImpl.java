@@ -26,7 +26,7 @@ public class NoteServiceImpl implements INoteService {
         return noteRepository.findAll();
     }
     @Override
-    public Note findNoteById(long id) throws NoteNotFoundException {
+    public Note findNoteById(String id) throws NoteNotFoundException {
         log.info("get note by id{},id");
         return noteRepository.findById(id).orElseThrow(()->
                 new NoteNotFoundException("Id note: {} "+id + "not found"));
@@ -48,7 +48,7 @@ public class NoteServiceImpl implements INoteService {
     }
 
     @Override
-    public Note deleteNote(long id) throws NoteNotFoundException {
+    public Note deleteNote(String id) throws NoteNotFoundException {
         log.info("note with: {} " + id , " delete");
         Note noteToDelete = findNoteById(id);
         noteRepository.delete(noteToDelete);

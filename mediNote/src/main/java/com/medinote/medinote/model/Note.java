@@ -10,9 +10,11 @@ import java.time.LocalDate;
 public class Note {
 
     @Id
-    private long id;
+    private String id;
 
     private long patientId;
+
+    private String message;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date = LocalDate.now();
@@ -20,17 +22,18 @@ public class Note {
     public Note() {
     }
 
-    public Note(long id, long patientId, LocalDate date) {
+    public Note(String id, long patientId, String message, LocalDate date) {
         this.id = id;
         this.patientId = patientId;
+        this.message = message;
         this.date = date;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -48,5 +51,13 @@ public class Note {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

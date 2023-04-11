@@ -49,9 +49,9 @@ public class NoteController {
      * @throws NoteNotFoundException
      */
     @GetMapping("/note")
-    public ResponseEntity<Note> getNoteById( @RequestParam Long id) throws NoteNotFoundException {
+    public ResponseEntity<Note> getNoteById( @RequestParam String id) throws NoteNotFoundException {
         log.info("get note by id :{} ", id);
-        return new ResponseEntity<>(noteService.findNoteById(id), OK);
+        return new ResponseEntity<>(noteService.findNoteById((id)), OK);
     }
 
     @PostMapping("/note")
@@ -78,8 +78,8 @@ public class NoteController {
      * @return OK
      * @throws NoteNotFoundException
      */
-    @GetMapping(value = "/noteDelete/{id}")
-    public ResponseEntity<Note> deleteNote(@PathVariable long id) throws NoteNotFoundException {
+    @DeleteMapping (value = "/noteDelete")
+    public ResponseEntity<Note> deleteNote(@RequestParam String id) throws NoteNotFoundException {
         log.info("remove note with id:{}", id);
         return new ResponseEntity<>(noteService.deleteNote(id), OK);
     }
