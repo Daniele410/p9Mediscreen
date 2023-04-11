@@ -36,7 +36,7 @@ public class NoteServiceImpl implements INoteService {
     @Override
     public Note saveNote(Note note) {
         log.info("save note: {} {}" + note.getId());
-        return noteRepository.save(note);
+        return noteRepository.insert(note);
     }
 
     @Override

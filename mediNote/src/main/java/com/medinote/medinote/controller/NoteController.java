@@ -57,6 +57,7 @@ public class NoteController {
     @PostMapping("/note")
     public ResponseEntity<Note> addNote(@RequestBody Note note) {
         log.info("save note :{}", note.getId());
+
         return new ResponseEntity<>(noteService.saveNote(note), CREATED);
     }
 
