@@ -12,7 +12,7 @@ public class Note {
     @Id
     private String id;
 
-    private long patientId;
+    private Long patientId;
 
     private String message;
 
@@ -37,11 +37,11 @@ public class Note {
         this.id = id;
     }
 
-    public long getPatientId() {
+    public Long getPatientId() {
         return patientId;
     }
 
-    public void setPatientId(long patientId) {
+    public void setPatientId(Long patientId) {
         this.patientId = patientId;
     }
 

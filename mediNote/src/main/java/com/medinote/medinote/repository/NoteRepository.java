@@ -12,6 +12,6 @@ import java.util.List;
 @Repository
 public interface NoteRepository extends MongoRepository<Note, String> {
 
-public List<Note> findByPatientId(long id);
+public List<Note> findByPatientId(Long id);
 
 }

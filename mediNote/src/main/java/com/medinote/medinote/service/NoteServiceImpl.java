@@ -55,6 +55,12 @@ public class NoteServiceImpl implements INoteService {
         return noteToDelete;
     }
 
+    @Override
+    public List<Note> findNoteByPatientId(Long id){
+        List<Note> note = noteRepository.findByPatientId(id);
+        return note;
+    }
+
 
 
 }
