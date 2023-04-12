@@ -15,7 +15,7 @@ public class PatientBean {
     @Size(min=1,max=50)
     private String firstName;
     @NotBlank
-    @Size(min=1,max=100)
+    @Size(min=1,max=50)
     private String lastName;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthday;
