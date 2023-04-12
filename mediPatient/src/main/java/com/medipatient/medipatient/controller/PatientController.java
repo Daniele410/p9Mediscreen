@@ -4,6 +4,7 @@ import com.medipatient.medipatient.Exception.UserNotFoundException;
 import com.medipatient.medipatient.model.Patient;
 import com.medipatient.medipatient.service.IPatientService;
 import com.medipatient.medipatient.service.PatientServiceImpl;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 import static org.springframework.http.HttpStatus.CREATED;

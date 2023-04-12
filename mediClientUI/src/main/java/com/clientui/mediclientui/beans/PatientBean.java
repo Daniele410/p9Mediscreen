@@ -5,24 +5,27 @@ import com.clientui.mediclientui.constant.Gender;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+
 
 public class PatientBean {
 
     private Long id;
-    @NotBlank
-    @Size(min=1,max=50)
+    @NotBlank(message = "Type is mandatory")
+    @Size(min = 1, max = 50)
     private String firstName;
-    @NotBlank
-    @Size(min=1,max=50)
+    @NotBlank(message = "Type is mandatory")
+    @Size(min = 1, max = 50)
     private String lastName;
+    @NotNull(message = "Select your birthday")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthday;
     private Gender gender;
-    @Size(min=0,max=150)
+    @Size(min = 0, max = 150)
     private String address;
-    @Size(min=0,max=20)
+    @Size(min = 0, max = 20)
     private String phone;
 
     public PatientBean() {

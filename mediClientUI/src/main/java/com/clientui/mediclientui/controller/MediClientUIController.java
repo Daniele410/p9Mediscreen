@@ -53,7 +53,7 @@ public class MediClientUIController {
 
 
     @PostMapping("/patientForm")
-    public String registerPatient(@RequestBody @Valid @ModelAttribute("patient") PatientBean patientBean, BindingResult bindingResult) {
+    public String registerPatient(@RequestBody @ModelAttribute("patient") @Valid PatientBean patientBean, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "redirect:/patientForm?error";
         }
@@ -75,7 +75,7 @@ public class MediClientUIController {
     @PostMapping(value = "/patientUpdateForm/{id}")
     public String updatePatient(@PathVariable("id") long id, @RequestBody @ModelAttribute("patient") PatientBean patientBean, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            return "redirect:/patientUpdate?error";
+            return "redirect:/patientUpdateForm?error";
         }
 
         patientProxy.updatePatient(patientBean);
@@ -101,29 +101,49 @@ public class MediClientUIController {
 
         List<NoteBean> noteList = noteProxy.getNoteByPatientId(id);
         model.addAttribute("notes",noteList);
-
+        logger.info("show all notes" + patientBean.getId());
         return "patientNotes";
 
 
     }
 
-    @GetMapping("/noteForm")
-    public String showAddNoteForm(NoteBean noteBean, Model model) {
+    @GetMapping("/noteForm/{id}")
+    public String showAddNoteForm(NoteBean noteBean, Model model, @PathVariable Long id) {
+        PatientBean patientBean= patientProxy.getPatient(id);
+        model.addAttribute("patient",patientBean);
+
         model.addAttribute("note", new NoteBean());
+
         logger.info("show add NoteForm");
         return "noteForm";
     }
 
-    @PostMapping("/noteForm")
-    public String registerPatient(@RequestBody @Valid @ModelAttribute("note") NoteBean noteBean, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "redirect:/noteForm?error";
-        }
-        noteBean.getPatientId();
-        noteProxy.addNote(noteBean);
-        logger.info("save note");
-        return "redirect:/patient/note/{id}"+noteBean.getPatientId()+"?patientId=" + noteBean.getPatientId();
+//    @PostMapping("/noteForm/{id}")
+//    public String registerPatient(@PathVariable Long id,@RequestBody @Valid @ModelAttribute("note") NoteBean noteBean, BindingResult bindingResult, Model model) {
+//        PatientBean patientBean= patientProxy.getPatient(id);
+//        model.addAttribute("patient",patientBean);
+//
+//        if (bindingResult.hasErrors()) {
+//            return "redirect:/noteForm/{id}?error";
+//        }
+//
+//
+//        noteProxy.addNote(noteBean);
+//        logger.info("save note");
+//        return "redirect:/patient/note/"+ noteBean.getPatientId();
+//
+//    }
 
+    @PostMapping(value = "/noteForm/{id}")
+    public String noteCreateValidation(@PathVariable("id") long id, @RequestBody @ModelAttribute("note") NoteBean note,PatientBean patientBean, BindingResult bindingResult, Model model)
+    {
+        PatientBean patient = patientProxy.getPatient(id);
+        if (bindingResult.hasErrors()) {
+            return "redirect:/noteForm/{id}?error";
+        }
+        noteProxy.addNote(note);
+        logger.info("add new Note");
+        return "redirect:/patient/note/{id}";
     }
 
 

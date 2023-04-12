@@ -14,4 +14,5 @@ public interface NoteRepository extends MongoRepository<Note, String> {
 
 public List<Note> findByPatientId(Long id);
 
+
 }

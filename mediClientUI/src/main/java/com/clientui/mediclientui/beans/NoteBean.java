@@ -1,18 +1,16 @@
 package com.clientui.mediclientui.beans;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
+
 
 public class NoteBean {
 
 
     private String id;
-
+    @NotBlank
     private Long patientId;
 
     @NotBlank(message = "Insert Message")

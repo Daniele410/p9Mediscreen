@@ -2,10 +2,10 @@ package com.medipatient.medipatient.model;
 
 import com.medipatient.medipatient.constant.Gender;
 import io.swagger.annotations.ApiParam;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity

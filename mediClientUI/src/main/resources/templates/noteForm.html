@@ -11,11 +11,11 @@
 <body>
 
 <!-- Navigation -->
-<div th:replace="fragments/general.html :: navigation"></div>
+<!--<div th:replace="fragments/general.html :: navigation"></div>-->
 
 <div class="container">
-    <form th:action="@{/noteForm}" th:object="${note}" method="post">
-        <h2 class="mt-4">Note form</h2>
+    <form th:action="@{/noteForm/{id}(id=${note.patientId})}" method="post" th:object="${note}" >
+        <h2 class="mt-4">Patient form</h2>
         <hr/>
         <!-- Form levels error messages here -->
         <div class="form-group row ">
@@ -27,27 +27,22 @@
         <!-- success message -->
         <div th:if="${param.success}">
             <div class="alert alert-info">You've successfully registered
-                your note!!
+                your patient!!
             </div>
         </div>
 
         <!-- error message -->
         <div>
             <div th:if="${param.error}">
-                <div class="alert alert-danger">Invalid Note!
+                <div class="alert alert-danger">Invalid Patient!
                 </div>
             </div>
         </div>
 
-        <div class="col-sm-4">
-            <input th:field="*{patientId}" type="hidden" class="form-control" placeholder="Add your Note">
-        </div>
-
-
         <div class="form-group row ">
             <label class="col-sm-2 col-form-label">Note</label>
             <div class="col-sm-4">
-                <input th:field="*{message}" type="text" class="form-control" placeholder="Add your Note">
+                <input type="text" th:field="${note.message}"  class="form-control" placeholder="Write a note">
             </div>
             <div class="col-sm-4">
                 <span class="text-danger" th:if="${#fields.hasErrors('message')}" th:errors="*{message}"></span>
@@ -55,15 +50,28 @@
         </div>
 
 
+<!--        <div class="form-group row ">-->
+<!--            <label class="col-sm-2 col-form-label">Last name</label>-->
+<!--            <div class="col-sm-4">-->
+<!--                <input th:field="*{lastName}" type="text" class="form-control" placeholder="Mandatory">-->
+<!--            </div>-->
+<!--            <div class="col-sm-4">-->
+<!--                <span class="text-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>-->
+<!--            </div>-->
+<!--        </div>-->
+
+
         <div class="form-group row">
             <div class="col-sm-10">
-                <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                <a href="#" class="btn btn-danger" role="button"
-                   th:href="@{'/patients/note/{id}'(id=*{id})}">Cancel</a>
+                <button type="submit" class="btn btn-primary mr-2">Save Note</button>
+                <a class="btn btn-danger" role="button"
+                   th:href="@{/patient/note/{id}(id=${id})}">Cancel</a>
             </div>
         </div>
     </form>
 </div>
+
+
 
 <!-- Footer -->
 <div th:replace="fragments/general.html :: footer"></div>
