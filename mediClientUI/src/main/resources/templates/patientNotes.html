@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Mediscreen</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" type="text/css"
+        href="/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/css/custom.css">
+  <link rel="icon" type="image/png" href="/img/favicon.ico" />
+</head>
+<body>
+
+<!-- Navigation -->
+<div th:replace="fragments/general.html :: navigation"></div>
+
+<!-- success message -->
+<div th:if="${param.success}">
+  <div class="alert alert-info">You've successfully registered
+    your patient!!
+  </div>
+</div>
+
+<div class="container">
+  <div class="row py-2">
+    <div class="col-6">
+      <h2>Notes listing</h2>
+    </div>
+    <div class="col-6 text-right">
+      <a href="#" class="btn btn-success btn-lg" role="button"
+         th:href="@{/noteForm}">Create Note</a>
+    </div>
+  </div>
+
+
+  <table class="table">
+    <thead class="thead-light">
+    <tr>
+      <th class="text-left">Note</th>
+      <th class="text-left">Date</th>
+      <th class="text-left">Action</th>
+    </tr>
+
+    </thead>
+    <tbody>
+    <tr th:each="note : ${notes}">
+      <td th:text="${note.getMessage()}" class="d-none d-md-table-cell"></td>
+      <td th:text="${note.getDate()}"></td>
+
+      <td style="width: 15%" class="text-center">
+                <a th:href="@{/patient/noteUpdateForm/{id}(id=${note.getId()})}" class="btn btn-info">Edit</a>
+                <a th:href="@{/patient/noteDelete/{id}(id=${note.getId()})}" class="btn btn-danger">Delete </a>
+      </td>
+
+
+    </tr>
+
+
+
+
+    </tr>
+    </tbody>
+  </table>
+
+</div>
+<!-- Footer -->
+<!--<div th:replace="fragments/general.html :: footer"></div>-->
+
+<!-- JAVASCRIPT -->
+<script src="/js/custom.js"></script>
+<script src="/webjars/jquery/3.6.0/jquery.slim.min.js"></script>
+<script type="text/javascript"
+        src="/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

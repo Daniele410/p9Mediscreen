@@ -88,7 +88,6 @@ public class NoteController {
     @GetMapping("/noteByPatientId")
     public ResponseEntity<List<Note>> getNoteByPatientId(@RequestParam Long id)  {
         log.info("get note by id :{} ", id);
-
         return new ResponseEntity<>(noteService.findNoteByPatientId(id), OK);
     }
 

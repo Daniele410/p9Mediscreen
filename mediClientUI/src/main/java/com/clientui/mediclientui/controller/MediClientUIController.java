@@ -1,6 +1,8 @@
 package com.clientui.mediclientui.controller;
 
+import com.clientui.mediclientui.beans.NoteBean;
 import com.clientui.mediclientui.beans.PatientBean;
+import com.clientui.mediclientui.proxies.NoteProxy;
 import com.clientui.mediclientui.proxies.PatientProxy;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,8 +21,11 @@ public class MediClientUIController {
 
     private final PatientProxy patientProxy;
 
-    public MediClientUIController(PatientProxy patientProxy) {
+    private final NoteProxy noteProxy;
+
+    public MediClientUIController(PatientProxy patientProxy, NoteProxy noteProxy) {
         this.patientProxy = patientProxy;
+        this.noteProxy = noteProxy;
     }
 
 
@@ -86,6 +91,39 @@ public class MediClientUIController {
         patientProxy.deletePatient(id);
         model.addAttribute("patient", patientProxy.patientsBeanList());
         return "redirect:/patients";
+    }
+
+    @GetMapping(value = "/patient/note/{id}")
+    public String patientNotes(@PathVariable Long id, Model model){
+
+        PatientBean patientBean= patientProxy.getPatient(id);
+        model.addAttribute("patients",patientBean);
+
+        List<NoteBean> noteList = noteProxy.getNoteByPatientId(id);
+        model.addAttribute("notes",noteList);
+
+        return "patientNotes";
+
+
+    }
+
+    @GetMapping("/noteForm")
+    public String showAddNoteForm(NoteBean noteBean, Model model) {
+        model.addAttribute("note", new NoteBean());
+        logger.info("show add NoteForm");
+        return "noteForm";
+    }
+
+    @PostMapping("/noteForm")
+    public String registerPatient(@RequestBody @Valid @ModelAttribute("note") NoteBean noteBean, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "redirect:/noteForm?error";
+        }
+        noteBean.getPatientId();
+        noteProxy.addNote(noteBean);
+        logger.info("save note");
+        return "redirect:/patient/note/{id}"+noteBean.getPatientId()+"?patientId=" + noteBean.getPatientId();
+
     }
 
 
