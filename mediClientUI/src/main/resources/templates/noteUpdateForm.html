@@ -29,14 +29,14 @@
     <!-- success message -->
     <div th:if="${param.success}">
       <div class="alert alert-info">You've successfully registered
-        your patient!!
+        your Note, press cancel to redirect!!
       </div>
     </div>
 
     <!-- error message -->
     <div>
       <div th:if="${param.error}">
-        <div class="alert alert-danger">Invalid Patient!
+        <div class="alert alert-danger">Empty Note!
         </div>
       </div>
     </div>
@@ -56,9 +56,10 @@
     <div class="form-group row">
       <div class="col-sm-10">
         <input type="hidden" th:field="${note.id}">
+        <input type="hidden" th:field="${note.patientId}">
         <button type="submit" class="btn btn-primary mr-2">Submit</button>
         <a class="btn btn-danger" role="button"
-           th:href="@{/patient/note/{id}(id=${id})}">Cancel</a>
+           th:href="@{/patient/note/{id}(id=${note.patientId})}">Cancel</a>
       </div>
     </div>
   </form>

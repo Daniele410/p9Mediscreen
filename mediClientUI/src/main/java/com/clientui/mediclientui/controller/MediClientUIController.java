@@ -143,5 +143,22 @@ public class MediClientUIController {
         return "noteUpdateForm";
     }
 
+    @PostMapping(value = "/noteUpdateForm/{id}")
+    public String updateNote(@PathVariable("id") String id,@Valid @RequestBody @ModelAttribute("note") NoteBean noteBean, BindingResult bindingResult, Model model) {
+//        NoteBean noteBeanPatientId = noteProxy.getNoteById(id);
+//        Long patientId = noteBeanPatientId.getPatientId();
+//        model.addAttribute("patient",patientBean);
+        if (bindingResult.hasErrors()) {
+            return "redirect:/noteUpdateForm/{id}?error";
+        }
+
+
+
+        noteProxy.updateNote(noteBean);
+        logger.info("update note");
+        return "redirect:/noteUpdateForm/{id}?success";
+
+    }
+
 
 }
