@@ -73,7 +73,7 @@ public class MediClientUIController {
     }
 
     @PostMapping(value = "/patientUpdateForm/{id}")
-    public String updatePatient(@PathVariable("id") long id, @RequestBody @ModelAttribute("patient") PatientBean patientBean, BindingResult bindingResult, Model model) {
+    public String updatePatient(@PathVariable("id") long id, @Valid @RequestBody @ModelAttribute("patient") PatientBean patientBean, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "redirect:/patientUpdateForm?error";
         }
@@ -94,13 +94,13 @@ public class MediClientUIController {
     }
 
     @GetMapping(value = "/patient/note/{id}")
-    public String patientNotes(@PathVariable Long id, Model model){
+    public String patientNotes(@PathVariable Long id, Model model, @ModelAttribute("patient") PatientBean patientBean) {
 
-        PatientBean patientBean= patientProxy.getPatient(id);
-        model.addAttribute("patients",patientBean);
+        patientBean = patientProxy.getPatient(id);
+        model.addAttribute("patients", patientBean);
 
         List<NoteBean> noteList = noteProxy.getNoteByPatientId(id);
-        model.addAttribute("notes",noteList);
+        model.addAttribute("notes", noteList);
         logger.info("show all notes" + patientBean.getId());
         return "patientNotes";
 
@@ -108,43 +108,42 @@ public class MediClientUIController {
     }
 
     @GetMapping("/noteForm/{id}")
-    public String showAddNoteForm(NoteBean noteBean, Model model, @PathVariable Long id) {
-        PatientBean patientBean= patientProxy.getPatient(id);
-        model.addAttribute("patient",patientBean);
+    public String showAddNoteForm(NoteBean noteBean, Model model, @PathVariable("id") Long id) {
+        PatientBean patient = patientProxy.getPatient(id);
+        model.addAttribute("patient", patient);
 
         model.addAttribute("note", new NoteBean());
-
         logger.info("show add NoteForm");
         return "noteForm";
     }
 
-//    @PostMapping("/noteForm/{id}")
-//    public String registerPatient(@PathVariable Long id,@RequestBody @Valid @ModelAttribute("note") NoteBean noteBean, BindingResult bindingResult, Model model) {
-//        PatientBean patientBean= patientProxy.getPatient(id);
-//        model.addAttribute("patient",patientBean);
-//
+    @PostMapping(value = "/noteFormAdd/{patientId}")
+    public String registerPatient(@PathVariable("patientId") Long patientId, @ModelAttribute("patient") PatientBean patientBean, @Valid @ModelAttribute("note") NoteBean noteBean, BindingResult bindingResult, Model model) {
+
+        patientBean.setId(patientId);
+        noteBean.setPatientId(patientBean.getId());
+        if (bindingResult.hasErrors()) {
+            return "redirect:/noteForm/{patientId}?error";
+        }
+
+
+        noteProxy.addNote(noteBean);
+        logger.info("save note");
+        return "redirect:/patient/note/{patientId}";
+
+    }
+
+//    @PostMapping(value = "/noteForm/{id}")
+//    public String noteCreateValidation(@PathVariable("id") Long id, Model model, @RequestBody @ModelAttribute("note") NoteBean note,@ModelAttribute("patient") PatientBean patientBean, BindingResult bindingResult)
+//    {
+//        PatientBean patient = patientProxy.getPatient(id);
 //        if (bindingResult.hasErrors()) {
 //            return "redirect:/noteForm/{id}?error";
 //        }
-//
-//
-//        noteProxy.addNote(noteBean);
-//        logger.info("save note");
-//        return "redirect:/patient/note/"+ noteBean.getPatientId();
-//
+//        noteProxy.addNote(note);
+//        logger.info("add new Note");
+//        return "redirect:/patient/note/{id}";
 //    }
-
-    @PostMapping(value = "/noteForm/{id}")
-    public String noteCreateValidation(@PathVariable("id") long id, @RequestBody @ModelAttribute("note") NoteBean note,PatientBean patientBean, BindingResult bindingResult, Model model)
-    {
-        PatientBean patient = patientProxy.getPatient(id);
-        if (bindingResult.hasErrors()) {
-            return "redirect:/noteForm/{id}?error";
-        }
-        noteProxy.addNote(note);
-        logger.info("add new Note");
-        return "redirect:/patient/note/{id}";
-    }
 
 
 }

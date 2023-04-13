@@ -30,8 +30,7 @@
     <div class="col-6 text-right">
       <tr th:each="patient : ${patients}">
       <a href="#" class="btn btn-success btn-lg" role="button"
-
-         th:href="@{/noteForm/{id}(id=${id})}">Create Note</a>
+         th:href="@{/noteForm/{id}(id=${patient.id})}">Create Note</a>
       </tr>
     </div>
   </div>

@@ -3,14 +3,14 @@ package com.clientui.mediclientui.beans;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 
 public class NoteBean {
 
-
     private String id;
-    @NotBlank
+    @NotNull(message = "Insert id")
     private Long patientId;
 
     @NotBlank(message = "Insert Message")
