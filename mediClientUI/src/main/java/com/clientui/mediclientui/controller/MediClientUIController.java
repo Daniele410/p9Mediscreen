@@ -145,18 +145,23 @@ public class MediClientUIController {
 
     @PostMapping(value = "/noteUpdateForm/{id}")
     public String updateNote(@PathVariable("id") String id,@Valid @RequestBody @ModelAttribute("note") NoteBean noteBean, BindingResult bindingResult, Model model) {
-//        NoteBean noteBeanPatientId = noteProxy.getNoteById(id);
-//        Long patientId = noteBeanPatientId.getPatientId();
-//        model.addAttribute("patient",patientBean);
+
         if (bindingResult.hasErrors()) {
             return "redirect:/noteUpdateForm/{id}?error";
         }
 
-
-
         noteProxy.updateNote(noteBean);
         logger.info("update note");
         return "redirect:/noteUpdateForm/{id}?success";
+
+    }
+
+    @GetMapping(value = "/noteDelete/{id}")
+    public String deleteNote(@PathVariable ("id") String id) {
+        Long patientId = noteProxy.getNoteById(id).getPatientId();
+        noteProxy.deleteNote(id);
+        logger.info("delete note" + id);
+        return "redirect:/patient/note/"+patientId+"?successDelete";
 
     }
 

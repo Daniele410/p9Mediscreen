@@ -37,7 +37,13 @@
 <!-- success message -->
 <div th:if="${param.success}">
   <div class="alert alert-info">You've successfully registered
-    your patient!!
+    your note!!
+  </div>
+</div>
+
+<div th:if="${param.successDelete}">
+  <div class="alert alert-info">You've successfully delete
+    your note!!
   </div>
 </div>
 
