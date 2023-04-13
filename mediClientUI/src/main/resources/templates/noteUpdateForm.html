@@ -2,18 +2,37 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>Mediscreen</title>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" type="text/css"
+        href="/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css" />
   <link rel="stylesheet" href="/css/custom.css">
-  <link rel="icon" type="image/png" href="/img/favicon.ico"/>
+  <link rel="icon" type="image/png" href="/img/favicon.ico" />
 </head>
 <body>
 
 <!-- Navigation -->
-<div th:replace="fragments/general.html :: navigation"></div>
+<!--<div th:replace="fragments/general.html :: navigation"></div>-->
+<div class="bg-light mt-1" th:fragment="header">
+  <div class="container">
+    <div class="row pt-4 pb-3">
+      <div class="col">
+        <ul class="list-inline align-content-lg-start font-weight-bold">
+          <li class="list-inline-item"><img src="/img/img.png" alt="Image" style="width:50px;height:60px;">
+          </li>
+          <li class="list-inline-item"><a>Mediscreen</a></li>
+
+          <li class="list-inline-item"> <a href="/">Home</a>&nbsp;|&nbsp;
+          <li class="list-inline-item">  <a href="/patients">Patients</a>&nbsp;
 
 
+        </ul>
+
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="container">
   <form action="#" th:action="@{/noteUpdateForm/{id}(id=${note.id})}" th:object="${note}" method="post">
@@ -66,16 +85,13 @@
 </div>
 
 <!-- Footer -->
+<!-- Footer -->
 <div th:replace="fragments/general.html :: footer"></div>
 
+<!-- JavaScript -->
 <script src="/webjars/jquery/3.6.0/jquery.slim.min.js"></script>
 <script type="text/javascript"
         src="/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
 
 </body>
 </html>

@@ -53,7 +53,7 @@ public class MediClientUIController {
 
 
     @PostMapping("/patientForm")
-    public String registerPatient(@RequestBody @ModelAttribute("patient") @Valid PatientBean patientBean, BindingResult bindingResult) {
+    public String registerPatient(@Valid @RequestBody @ModelAttribute("patient")  PatientBean patientBean, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "redirect:/patientForm?error";
         }
