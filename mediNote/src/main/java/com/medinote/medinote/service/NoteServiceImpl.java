@@ -44,7 +44,8 @@ public class NoteServiceImpl implements INoteService {
         log.info("update note: {} {}" + note.getId());
         noteRepository.findById(note.getId()).orElseThrow(()->
                 new NoteNotFoundException("id note: {} " + note.getId() + " not found!"));
-        return noteRepository.save(note);
+        noteRepository.save(note);
+        return note;
     }
 
     @Override
