@@ -133,17 +133,15 @@ public class MediClientUIController {
 
     }
 
-//    @PostMapping(value = "/noteForm/{id}")
-//    public String noteCreateValidation(@PathVariable("id") Long id, Model model, @RequestBody @ModelAttribute("note") NoteBean note,@ModelAttribute("patient") PatientBean patientBean, BindingResult bindingResult)
-//    {
-//        PatientBean patient = patientProxy.getPatient(id);
-//        if (bindingResult.hasErrors()) {
-//            return "redirect:/noteForm/{id}?error";
-//        }
-//        noteProxy.addNote(note);
-//        logger.info("add new Note");
-//        return "redirect:/patient/note/{id}";
-//    }
+    @GetMapping(value = "/noteUpdateForm/{id}")
+    public String showUpdateNoteForm(@PathVariable("id") String id, Model model, NoteBean noteBean) {
+        logger.debug("get request /noteUpdateForm/{}", id);
+        noteBean = noteProxy.getNoteById(id);
+        model.addAttribute("note",noteBean);
+        logger.info("show noteUpdateForm");
+
+        return "noteUpdateForm";
+    }
 
 
 }

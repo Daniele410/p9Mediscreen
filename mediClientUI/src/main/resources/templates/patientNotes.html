@@ -13,7 +13,7 @@
 <body>
 
 <!-- Navigation -->
-<div th:replace="fragments/general.html :: navigation"></div>
+<!--<div th:replace="fragments/general.html :: navigation"></div>-->
 
 <!-- success message -->
 <div th:if="${param.success}">
@@ -51,8 +51,8 @@
       <td th:text="${note.getDate()}"></td>
 
       <td style="width: 15%" class="text-center">
-                <a th:href="@{/patient/noteUpdateForm/{id}(id=${note.getId()})}" class="btn btn-info">Edit</a>
-                <a th:href="@{/patient/noteDelete/{id}(id=${note.getId()})}" class="btn btn-danger">Delete </a>
+                <a th:href="@{/noteUpdateForm/{id}(id=${note.getId()})}" class="btn btn-info">Edit</a>
+                <a th:href="@{/noteDelete/{id}(id=${note.getId()})}" class="btn btn-danger">Delete </a>
       </td>
 
 
@@ -70,10 +70,10 @@
 <!--<div th:replace="fragments/general.html :: footer"></div>-->
 
 <!-- JAVASCRIPT -->
-<script src="/js/custom.js"></script>
-<script src="/webjars/jquery/3.6.0/jquery.slim.min.js"></script>
-<script type="text/javascript"
-        src="/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
+<!--<script src="/js/custom.js"></script>-->
+<!--<script src="/webjars/jquery/3.6.0/jquery.slim.min.js"></script>-->
+<!--<script type="text/javascript"-->
+<!--        src="/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>-->
 
 </body>
 </html>

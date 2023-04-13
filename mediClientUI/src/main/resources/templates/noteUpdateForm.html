@@ -16,7 +16,7 @@
 
 
 <div class="container">
-  <form action="#" th:action="@{/noteUpdateForm/{id}(id=${patient.id})}" th:object="${patient}" method="post">
+  <form action="#" th:action="@{/noteUpdateForm/{id}(id=${note.id})}" th:object="${note}" method="post">
     <h2 class="mt-4">Patient Update</h2>
     <hr/>
     <!-- Form levels error messages here -->
@@ -42,76 +42,23 @@
     </div>
 
     <div class="form-group row ">
-      <label class="col-sm-2 col-form-label">First name</label>
+      <label class="col-sm-2 col-form-label">Note</label>
       <div class="col-sm-4">
-        <input th:field="${patient.firstName}" type="text" class="form-control" placeholder="Mandatory">
+        <input th:field="${note.message}" type="text" class="form-control" placeholder="Mod your Message">
       </div>
       <div class="col-sm-4">
-        <span class="text-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
-      </div>
-    </div>
-
-
-    <div class="form-group row ">
-      <label class="col-sm-2 col-form-label">Last name</label>
-      <div class="col-sm-4">
-        <input th:field="${patient.lastName}" type="text" class="form-control" placeholder="Mandatory">
-      </div>
-      <div class="col-sm-4">
-        <span class="text-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
-      </div>
-    </div>
-
-    <div class="form-group row ">
-      <label class="col-sm-2 col-form-label">Date of birthday</label>
-      <div class="col-sm-4">
-        <input type="date"  th:field= "${patient.birthday}" class="form-control" placeholder="Mandatory" >
-
-      </div>
-      <div class="col-sm-4">
-        <span class="text-danger" th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}"></span>
+        <span class="text-danger" th:if="${#fields.hasErrors('message')}" th:errors="*{message}"></span>
       </div>
     </div>
 
 
 
-    <div class="form-group row ">
-      <label class="col-sm-2 col-form-label mr-0">Gender</label>
-      <div class="col-sm-4">
-        <input th:field="${patient.gender}" type="radio" name="gender" value="MALE" id="MALE"/> <label for="Male">Male</label>
-        <input th:field="${patient.gender}" type="radio" name="gender" value="FEMALE" id="FEMALE"/> <label
-              for="Female">Female</label>
-      </div>
-      <div class="col-sm-4">
-        <span class="text-danger" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></span>
-      </div>
-    </div>
-
-    <div class="form-group row ">
-      <label class="col-sm-2 col-form-label">Address</label>
-      <div class="col-sm-4">
-        <input th:field="${patient.address}" type="text" class="form-control" placeholder="Mandatory">
-      </div>
-      <div class="col-sm-4">
-        <span class="text-danger" th:if="${#fields.hasErrors('address')}" th:errors="*{address}" ></span>
-      </div>
-    </div>
-
-    <div class="form-group row ">
-      <label class="col-sm-2 col-form-label">Phone</label>
-      <div class="col-sm-4">
-        <input th:field="${patient.phone}" type="text" class="form-control" placeholder="Mandatory">
-      </div>
-      <div class="col-sm-4">
-        <span class="text-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span>
-      </div>
-    </div>
     <div class="form-group row">
       <div class="col-sm-10">
-        <input type="hidden" th:field="${patient.id}">
+        <input type="hidden" th:field="${note.id}">
         <button type="submit" class="btn btn-primary mr-2">Submit</button>
-        <a href="#" class="btn btn-danger" role="button"
-           th:href="@{/patients}">Cancel</a>
+        <a class="btn btn-danger" role="button"
+           th:href="@{/patient/note/{id}(id=${id})}">Cancel</a>
       </div>
     </div>
   </form>
