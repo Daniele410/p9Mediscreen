@@ -55,7 +55,7 @@ public class MediClientUIController {
     @PostMapping("/patientForm")
     public String registerPatient(@Valid @RequestBody @ModelAttribute("patient")  PatientBean patientBean, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "redirect:/patientForm?error";
+            return "/patientForm";
         }
         patientProxy.createPatient(patientBean);
         logger.info("save patient");
@@ -118,10 +118,8 @@ public class MediClientUIController {
     }
 
     @PostMapping(value = "/noteFormAdd/{patientId}")
-    public String registerPatient(@PathVariable("patientId") Long patientId, @ModelAttribute("patient") PatientBean patientBean, @Valid @ModelAttribute("note") NoteBean noteBean, BindingResult bindingResult, Model model) {
+    public String registerNotePatient( @Valid @ModelAttribute("note") NoteBean noteBean, BindingResult bindingResult) {
 
-        patientBean.setId(patientId);
-        noteBean.setPatientId(patientBean.getId());
         if (bindingResult.hasErrors()) {
             return "redirect:/noteForm/{patientId}?error";
         }

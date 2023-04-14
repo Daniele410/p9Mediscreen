@@ -62,7 +62,7 @@
         <div class="form-group row ">
             <label class="col-sm-2 col-form-label">First name</label>
             <div class="col-sm-4">
-                <input th:field="*{firstName}" type="text" class="form-control" placeholder="Mandatory">
+                <input th:field="*{firstName}" id="firstName" type="text" class="form-control" placeholder="Mandatory">
             </div>
             <div class="col-sm-4">
                 <span class="text-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>

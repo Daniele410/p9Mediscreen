@@ -1,7 +1,9 @@
 package com.clientui.mediclientui.controller;
 
+import com.clientui.mediclientui.beans.NoteBean;
 import com.clientui.mediclientui.beans.PatientBean;
 import com.clientui.mediclientui.constant.Gender;
+import com.clientui.mediclientui.proxies.NoteProxy;
 import com.clientui.mediclientui.proxies.PatientProxy;
 import io.swagger.models.Model;
 import org.junit.jupiter.api.Test;
@@ -23,6 +25,9 @@ class MediClientUIControllerTest {
 
     @Mock
     PatientProxy patientProxy;
+
+    @Mock
+    NoteProxy noteProxy;
 
     @InjectMocks
     private MediClientUIController mediClientUIController;
@@ -176,4 +181,26 @@ class MediClientUIControllerTest {
         assertEquals("redirect:/patients", result);
         verify(patientProxy, times(1)).deletePatient(1L);
     }
+
+//    @Test
+//    void showNotesShouldReturnModifiedModelAndView() {
+//        //Given
+//        List<NoteBean> allNotes = new ArrayList<>();
+//        NoteBean noteBean1 = new NoteBean("1234123", 1L, "Bros", LocalDate.of(1084, 9, 10));
+//        NoteBean noteBean2 = new NoteBean("0987654", 2L, "Bros", LocalDate.of(1986, 1, 18));
+//
+//        allNotes.add(noteBean1);
+//        allNotes.add(noteBean2);
+//
+//        when(noteProxy.getNoteByPatientId(1L)).thenReturn(allNotes);
+//
+//        //When
+//
+//        String result = mediClientUIController.patientNotes(mock(org.springframework.ui.Model.class));
+//
+//        //Then
+//        assertEquals("patientNotes", result);
+//
+//
+//    }
 }
