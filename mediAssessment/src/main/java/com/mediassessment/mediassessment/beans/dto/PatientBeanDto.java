@@ -8,14 +8,12 @@ import java.time.LocalDate;
 
 public class PatientBeanDto {
 
-    private Long id;
 
     private String firstName;
 
     private String lastName;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate birthday;
+    private long age;
     private Gender gender;
 
     RiskLevel riskLevel;
@@ -23,25 +21,15 @@ public class PatientBeanDto {
     public PatientBeanDto() {
     }
 
-    public PatientBeanDto(Long id, String firstName, String lastName, LocalDate birthday, Gender gender, RiskLevel riskLevel) {
-        this.id = id;
+    public PatientBeanDto(String firstName, String lastName, long age, Gender gender, RiskLevel riskLevel) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.birthday = birthday;
+        this.age = age;
         this.gender = gender;
         this.riskLevel = riskLevel;
     }
 
-    public PatientBeanDto(String lastName, String firstName, Gender gender, long patientAge, RiskLevel riskLevel) {
-    }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -59,12 +47,12 @@ public class PatientBeanDto {
         this.lastName = lastName;
     }
 
-    public LocalDate getBirthday() {
-        return birthday;
+    public long getAge() {
+        return age;
     }
 
-    public void setBirthday(LocalDate birthday) {
-        this.birthday = birthday;
+    public void setAge(long age) {
+        this.age = age;
     }
 
     public Gender getGender() {
@@ -74,7 +62,6 @@ public class PatientBeanDto {
     public void setGender(Gender gender) {
         this.gender = gender;
     }
-
 
     public RiskLevel getRiskLevel() {
         return riskLevel;

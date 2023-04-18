@@ -2,6 +2,7 @@ package com.mediassessment.mediassessment.service;
 
 import com.mediassessment.mediassessment.beans.NoteBean;
 import com.mediassessment.mediassessment.beans.PatientBean;
+import com.mediassessment.mediassessment.beans.dto.PatientBeanDto;
 import com.mediassessment.mediassessment.constant.Gender;
 import com.mediassessment.mediassessment.constant.RiskLevel;
 import com.mediassessment.mediassessment.proxies.NoteProxy;
@@ -24,7 +25,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class AssessmentImplTest {
     @InjectMocks
-    AssessmentImpl assessment;
+    AssessmentServiceImpl assessment;
     @Mock
     NoteProxy noteProxy;
     @Mock
@@ -83,6 +84,61 @@ class AssessmentImplTest {
 
     }
 
+    @Test
+    void getRapportById_shouldResultTriggerTwo() {
+        //Given
+
+        List<NoteBean> notes= new ArrayList<>();
+        notes.add(new NoteBean("1234123", 1L, "The is patient have more Hémoglobine", LocalDate.of(1084, 9, 10)));
+        notes.add(new NoteBean("9876543", 1L, "The patient is Fumeur", LocalDate.of(1084, 12, 12)));
+        when(patientProxy.getPatient(patient.getId())).thenReturn(patient);
+        when(noteProxy.getNoteByPatientId(patient.getId())).thenReturn(notes);
+        //When
+        PatientBeanDto status = assessment.getRapportById(patient.getId());
+
+        //Then
+        assertEquals(status.getRiskLevel().name(),"BORDERLINE");
+
+    }
+
+    @Test
+    void getRapportById_shouldResultTriggerSix() {
+        //Given
+
+        List<NoteBean> notes= new ArrayList<>();
+        notes.add(new NoteBean("1234123", 1L, " Le patient a plus d'Hémoglobine et peu d' Anticorps /n", LocalDate.of(1084, 9, 10)));
+        notes.add(new NoteBean("9876543", 1L, " The patient is Fumeur et gain de Poids n/", LocalDate.of(1084, 12, 12)));
+        notes.add(new NoteBean("9876543", 1L, " le patient a des Vertiges et Cholestérol increase /n", LocalDate.of(1084, 12, 12)));
+
+        when(patientProxy.getPatient(patient.getId())).thenReturn(patient);
+        when(noteProxy.getNoteByPatientId(patient.getId())).thenReturn(notes);
+        //When
+        PatientBeanDto status = assessment.getRapportById(patient.getId());
+
+        //Then
+        assertEquals(status.getRiskLevel().name(),"IN_DANGER");
+
+    }
+
+    @Test
+    void getRapportById_shouldResultTriggerEight() {
+        //Given
+
+        List<NoteBean> notes= new ArrayList<>();
+        notes.add(new NoteBean("1234123", 1L, " Le patient a plus d'Hémoglobine et peu d' Anticorps ", LocalDate.of(1084, 9, 10)));
+        notes.add(new NoteBean("9876543", 1L, " The patient is Fumeur et gain de Poids n/", LocalDate.of(1084, 12, 12)));
+        notes.add(new NoteBean("9876543", 1L, " le patient a des Vertiges et Cholestérol increase ", LocalDate.of(1084, 12, 12)));
+        notes.add(new NoteBean("9876543", 1L, " le patient a des symptômes Anormal  et des étrangers Réaction a la thérapie ", LocalDate.of(1084, 12, 12)));
+
+        when(patientProxy.getPatient(patient.getId())).thenReturn(patient);
+        when(noteProxy.getNoteByPatientId(patient.getId())).thenReturn(notes);
+        //When
+        PatientBeanDto status = assessment.getRapportById(patient.getId());
+
+        //Then
+        assertEquals(status.getRiskLevel().name(),"EARLY_ONSET");
+
+    }
 
 
 }

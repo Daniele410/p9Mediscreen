@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class AssessmentImpl implements IAssessment {
+public class AssessmentServiceImpl implements IAssessmentService {
 
     private static final Logger logger = LogManager.getLogger("AssessmentImpl");
 
@@ -41,7 +41,7 @@ public class AssessmentImpl implements IAssessment {
 
     /**
      * @param patient to calculate risk
-     * @param notes of patient
+     * @param notes   of patient
      * @return status of patient
      */
 
@@ -94,11 +94,11 @@ public class AssessmentImpl implements IAssessment {
      * @param patientId to rapport risk level
      * @return rapport of risk level
      */
-    public PatientBeanDto getRapportById (int patientId) {
+    public PatientBeanDto getRapportById(Long patientId) {
         PatientBean patient = patientProxy.getPatient(patientId);
-        List<NoteBean> notes = noteProxy.getNoteByPatientId(patient.getId());
-        RiskLevel riskLevel = calculRisks(patient, notes);
-        PatientBeanDto rapport = new PatientBeanDto(patient.getLastName(), patient.getFirstName(), patient.getGender(), getPatientAge(patient), riskLevel);
+        List<NoteBean> notes = noteProxy.getNoteByPatientId(patientId);
+        RiskLevel status = calculRisks(patient, notes);
+        PatientBeanDto rapport = new PatientBeanDto(patient.getFirstName(), patient.getLastName(), getPatientAge(patient), patient.getGender(), status);
         return rapport;
     }
 

@@ -93,17 +93,4 @@ public class PatientBean {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-
-    @Override
-    public String toString() {
-        return "PatientBean{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", birthday=" + birthday +
-                ", gender=" + gender +
-                ", address='" + address + '\'' +
-                ", phone='" + phone + '\'' +
-                '}';
-    }
 }
