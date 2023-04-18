@@ -63,7 +63,8 @@
       <th class="text-left d-none d-md-table-cell">Gender</th>
       <th class="text-left d-none d-md-table-cell">Address</th>
       <th class="text-left d-none d-md-table-cell">Phone</th>
-      <th class="text-left">notes</th>
+      <th class="text-left">Notes</th>
+      <th class="text-left">Assessment</th>
       <th class="text-left">Action</th>
     </tr>
     </thead>
@@ -78,6 +79,10 @@
 
       <td>
       <a th:href="@{/patient/note/{id}(id=${patient.id})}" class="btn btn-info">Note</a>
+      </td>
+
+      <td>
+        <a th:href="@{/patient/assessment/{id}(id=${patient.id})}" class="btn btn-info">Assessment</a>
       </td>
 
       <td style="width: 15%" class="text-center">

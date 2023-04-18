@@ -17,7 +17,7 @@ import java.util.List;
 @Controller
 public class MediClientUIController {
 
-    private static final Logger logger = LogManager.getLogger("mediClientUIController");
+    private static final Logger logger = LogManager.getLogger("MediClientUIController");
 
     private final PatientProxy patientProxy;
 
