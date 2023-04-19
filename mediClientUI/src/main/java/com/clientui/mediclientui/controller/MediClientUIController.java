@@ -167,5 +167,21 @@ public class MediClientUIController {
 
     }
 
+    @GetMapping(value = "/patient/assessment/{id}")
+    public String patientAssessment(@PathVariable Long id, Model model, @ModelAttribute("patient") PatientBean patientBean) {
+
+        patientBean = patientProxy.getPatient(id);
+        model.addAttribute("patients", patientBean);
+
+        PatientBeanDto assessment = assessmentProxy.getRapportAssessmentById(id).getBody();
+        model.addAttribute("assessments", assessment);
+        logger.info("show assessment for " + patientBean.getId() + " result " + assessment.getRiskLevel().name());
+        return "patientAssessment";
+
+
+    }
+
+
+
 
 }

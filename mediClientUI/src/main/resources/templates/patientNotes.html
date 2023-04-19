@@ -1,94 +1,92 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Mediscreen</title>
-  <meta charset="UTF-8" />
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" type="text/css"
-        href="/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="/css/custom.css">
-  <link rel="icon" type="image/png" href="/img/favicon.ico" />
+    <title>Mediscreen</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css"
+          href="/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/custom.css">
+    <link rel="icon" type="image/png" href="/img/favicon.ico"/>
 </head>
 <body>
 
 <!-- Navigation -->
 <!--<div th:replace="fragments/general.html :: navigation"></div>-->
 <div class="bg-light mt-1" th:fragment="header">
-  <div class="container">
-    <div class="row pt-4 pb-3">
-      <div class="col">
-        <ul class="list-inline align-content-lg-start font-weight-bold">
-          <li class="list-inline-item"><img src="/img/img.png" alt="Image" style="width:50px;height:60px;">
-          </li>
-          <li class="list-inline-item"><a>Mediscreen</a></li>
+    <div class="container">
+        <div class="row pt-4 pb-3">
+            <div class="col">
+                <ul class="list-inline align-content-lg-start font-weight-bold">
+                    <li class="list-inline-item"><img src="/img/img.png" alt="Image" style="width:50px;height:60px;">
+                    </li>
+                    <li class="list-inline-item"><a>Mediscreen</a></li>
 
-          <li class="list-inline-item"> <a href="/">Home</a>&nbsp;|&nbsp;
-          <li class="list-inline-item">  <a href="/patients">Patients</a>&nbsp;
+                    <li class="list-inline-item"><a href="/">Home</a>&nbsp;|&nbsp;
+                    <li class="list-inline-item"><a href="/patients">Patients</a>&nbsp;
 
 
-        </ul>
+                </ul>
 
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 <!-- success message -->
 <div th:if="${param.success}">
-  <div class="alert alert-info">You've successfully registered
-    your note!!
-  </div>
+    <div class="alert alert-info">You've successfully registered
+        your note!!
+    </div>
 </div>
 
 <div th:if="${param.successDelete}">
-  <div class="alert alert-info">You've successfully delete
-    your note!!
-  </div>
+    <div class="alert alert-info">You've successfully delete
+        your note!!
+    </div>
 </div>
 
 <div class="container">
-  <div class="row py-2">
-    <div class="col-6">
-      <h2>Notes listing</h2>
+    <div class="row py-2">
+        <div class="col-6">
+            <h2>Notes listing</h2>
+        </div>
+        <div class="col-6 text-right">
+            <tr th:each="patient : ${patients}">
+                <a href="#" class="btn btn-success btn-lg" role="button"
+                   th:href="@{/noteForm/{id}(id=${patient.id})}">Create Note</a>
+            </tr>
+        </div>
     </div>
-    <div class="col-6 text-right">
-      <tr th:each="patient : ${patients}">
-      <a href="#" class="btn btn-success btn-lg" role="button"
-         th:href="@{/noteForm/{id}(id=${patient.id})}">Create Note</a>
-      </tr>
-    </div>
-  </div>
 
 
-  <table class="table">
-    <thead class="thead-light">
-    <tr>
-      <th class="text-left">Note</th>
-      <th class="text-left">Date</th>
-      <th class="text-left">Action</th>
-    </tr>
+    <table class="table">
+        <thead class="thead-light">
+        <tr>
+            <th class="text-left">Note</th>
+            <th class="text-left">Date</th>
+            <th class="text-left">Action</th>
+        </tr>
 
-    </thead>
-    <tbody>
-    <tr th:each="note : ${notes}">
-      <td th:text="${note.getMessage()}" class="d-none d-md-table-cell"></td>
-      <td th:text="${note.getDate()}"></td>
+        </thead>
+        <tbody>
+        <tr th:each="note : ${notes}">
+            <td th:text="${note.getMessage()}" class="d-none d-md-table-cell"></td>
+            <td th:text="${note.getDate()}"></td>
 
-      <td style="width: 15%" class="text-center">
+            <td style="width: 15%" class="text-center">
                 <a th:href="@{/noteUpdateForm/{id}(id=${note.getId()})}" class="btn btn-info">Edit</a>
                 <a th:href="@{/noteDelete/{id}(id=${note.getId()})}" class="btn btn-danger">Delete </a>
-      </td>
+            </td>
 
 
-    </tr>
+        </tr>
 
 
-
-
-    </tr>
-    </tbody>
-  </table>
+        </tr>
+        </tbody>
+    </table>
 
 </div>
 <!-- Footer -->

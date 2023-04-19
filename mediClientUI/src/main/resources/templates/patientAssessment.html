@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Mediscreen</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css"
+          href="/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/custom.css">
+    <link rel="icon" type="image/png" href="/img/favicon.ico"/>
+</head>
+<body>
+
+<!-- Navigation -->
+<!--<div th:replace="fragments/general.html :: navigation"></div>-->
+<div class="bg-light mt-1" th:fragment="header">
+    <div class="container">
+        <div class="row pt-4 pb-3">
+            <div class="col">
+                <ul class="list-inline align-content-lg-start font-weight-bold">
+                    <li class="list-inline-item"><img src="/img/img.png" alt="Image" style="width:50px;height:60px;">
+                    </li>
+                    <li class="list-inline-item"><a>Mediscreen</a></li>
+
+                    <li class="list-inline-item"><a href="/">Home</a>&nbsp;|&nbsp;
+                    <li class="list-inline-item"><a href="/patients">Patients</a>&nbsp;
+
+
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+
+            <h2>Assessment</h2>
+
+            <table class="table">
+                <thead class="thead-light">
+                <tr>
+                    <th class="text-left">Name of Patient</th>
+                    <th class="text-left">Surname of Patient</th>
+                    <th class="text-left">RiskResult</th>
+                </tr>
+
+                </thead>
+                <tbody>
+                <tr th:each="assessment : ${assessments}">
+                    <td th:text="${assessments.getFirstName()}" class="d-none d-md-table-cell">
+                    <td th:text="${assessments.getLastName()}" class="d-none d-md-table-cell">
+                        <strong>
+                            <td th:text="${assessments.getRiskLevel()}"></td>
+                        </strong>
+                </tr>
+
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+        <!-- Footer -->
+        <div th:replace="fragments/general.html :: footer"></div>
+
+        <!-- JavaScript -->
+        <script src="/webjars/jquery/3.6.0/jquery.slim.min.js"></script>
+        <script type="text/javascript"
+                src="/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
