@@ -23,9 +23,14 @@ public class AssessmentServiceImpl implements IAssessmentService {
 
     private static final Logger logger = LogManager.getLogger("AssessmentImpl");
 
-    NoteProxy noteProxy;
+    private final NoteProxy noteProxy;
 
-    PatientProxy patientProxy;
+    private final PatientProxy patientProxy;
+
+    public AssessmentServiceImpl(NoteProxy noteProxy, PatientProxy patientProxy) {
+        this.noteProxy = noteProxy;
+        this.patientProxy = patientProxy;
+    }
 
 
     /**
@@ -94,6 +99,7 @@ public class AssessmentServiceImpl implements IAssessmentService {
      * @param patientId to rapport risk level
      * @return rapport of risk level
      */
+    @Override
     public PatientBeanDto getRapportById(Long patientId) {
         PatientBean patient = patientProxy.getPatient(patientId);
         List<NoteBean> notes = noteProxy.getNoteByPatientId(patientId);
