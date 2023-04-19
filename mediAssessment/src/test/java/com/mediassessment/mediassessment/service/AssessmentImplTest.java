@@ -126,7 +126,7 @@ class AssessmentImplTest {
 
         List<NoteBean> notes= new ArrayList<>();
         notes.add(new NoteBean("1234123", 1L, " Le patient a plus d'Hémoglobine et peu d' Anticorps ", LocalDate.of(1084, 9, 10)));
-        notes.add(new NoteBean("9876543", 1L, " The patient is Fumeur et gain de Poids n/", LocalDate.of(1084, 12, 12)));
+        notes.add(new NoteBean("9876543", 1L, " The patient is Fumeur et gain de Poids n/ ", LocalDate.of(1084, 12, 12)));
         notes.add(new NoteBean("9876543", 1L, " le patient a des Vertiges et Cholestérol increase ", LocalDate.of(1084, 12, 12)));
         notes.add(new NoteBean("9876543", 1L, " le patient a des symptômes Anormal  et des étrangers Réaction a la thérapie ", LocalDate.of(1084, 12, 12)));
 

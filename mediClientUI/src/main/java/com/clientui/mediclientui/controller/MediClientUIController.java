@@ -2,6 +2,8 @@ package com.clientui.mediclientui.controller;
 
 import com.clientui.mediclientui.beans.NoteBean;
 import com.clientui.mediclientui.beans.PatientBean;
+import com.clientui.mediclientui.beans.dto.PatientBeanDto;
+import com.clientui.mediclientui.proxies.AssessmentProxy;
 import com.clientui.mediclientui.proxies.NoteProxy;
 import com.clientui.mediclientui.proxies.PatientProxy;
 import org.apache.logging.log4j.LogManager;
@@ -23,9 +25,12 @@ public class MediClientUIController {
 
     private final NoteProxy noteProxy;
 
-    public MediClientUIController(PatientProxy patientProxy, NoteProxy noteProxy) {
+    private final AssessmentProxy assessmentProxy;
+
+    public MediClientUIController(PatientProxy patientProxy, NoteProxy noteProxy, AssessmentProxy assessmentProxy) {
         this.patientProxy = patientProxy;
         this.noteProxy = noteProxy;
+        this.assessmentProxy = assessmentProxy;
     }
 
 
@@ -39,7 +44,6 @@ public class MediClientUIController {
         List<PatientBean> patients = patientProxy.patientsBeanList();
         model.addAttribute("patients", patients);
 
-        //add Note
 
         return "patients";
     }

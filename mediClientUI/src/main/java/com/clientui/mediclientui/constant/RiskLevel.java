@@ -1,4 +1,4 @@
-package com.mediassessment.mediassessment.constant;
+package com.clientui.mediclientui.constant;
 
 public enum RiskLevel {
     NONE,

@@ -31,6 +31,7 @@ public class AssessmentController {
     public ResponseEntity<PatientBeanDto> getRapportAssessmentById (@RequestParam Long id){
         log.info("get rapport by patientId :{} ", id);
         return new ResponseEntity<>(assessmentService.getRapportById((id)), OK);
+
     }
 
 }
