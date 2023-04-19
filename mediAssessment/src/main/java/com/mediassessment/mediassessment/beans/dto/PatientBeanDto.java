@@ -8,11 +8,8 @@ import java.time.LocalDate;
 
 public class PatientBeanDto {
 
-
     private String firstName;
-
     private String lastName;
-
     private long age;
     private Gender gender;
 
