@@ -223,5 +223,78 @@ class AssessmentImplTest {
 
     }
 
+    @Test
+    void getRapportById_shouldResultGenderFemaleOverThirtyYearsResultTriggerEight() {
+        //Given
+        PatientBean patient3 = new PatientBean(3L, "Monica", "Carlita", LocalDate.of(2015, 5, 1), Gender.FEMALE, "St Toto", "213213213213");
+        List<NoteBean> notes= new ArrayList<>();
+        notes.add(new NoteBean("1234123", 3L, " Le patient a plus d'Hémoglobine et peu d' Anticorps ", LocalDate.of(1084, 9, 10)));
+        notes.add(new NoteBean("9876543", 3L, " The patient is Fumeur et gain de Poids n/ ", LocalDate.of(1084, 12, 12)));
+        notes.add(new NoteBean("9876543", 3L, " le patient a des Vertiges et Cholestérol increase ", LocalDate.of(1084, 12, 12)));
+        notes.add(new NoteBean("9876543", 3L, " le patient a des symptômes Anormal  et des étrangers Réaction a la thérapie ", LocalDate.of(1084, 12, 12)));
+
+        when(patientProxy.getPatient(patient3.getId())).thenReturn(patient3);
+        when(noteProxy.getNoteByPatientId(patient3.getId())).thenReturn(notes);
+        //When
+        PatientBeanDto status = assessment.getRapportById(patient3.getId());
+
+        //Then
+        assertEquals(status.getRiskLevel().name(),"EARLY_ONSET");
+
+    }
+
+    @Test
+    void getRapportById_shouldResultGenderMaleLessThirtyYearsResultTriggerFour() {
+        //Given
+        PatientBean patient3 = new PatientBean(3L, "Calogero", "Bianchi", LocalDate.of(2000, 5, 1), Gender.MALE, "St Toto", "213213213213");
+        List<NoteBean> notes= new ArrayList<>();
+        notes.add(new NoteBean("1234123", 3L, " Le patient a plus d'Hémoglobine et peu d' Anticorps ", LocalDate.of(1084, 9, 10)));
+        notes.add(new NoteBean("9876543", 3L, " The patient is Fumeur et gain de Poids n/ ", LocalDate.of(2022, 11, 12)));
+
+        when(patientProxy.getPatient(patient3.getId())).thenReturn(patient3);
+        when(noteProxy.getNoteByPatientId(patient3.getId())).thenReturn(notes);
+        //When
+        PatientBeanDto status = assessment.getRapportById(patient3.getId());
+
+        //Then
+        assertEquals(status.getRiskLevel().name(),"IN_DANGER");
+
+    }
+
+    @Test
+    void getRapportById_shouldResultGenderFemaleLessThirtyYearsResultTriggerThree() {
+
+        //Given
+        PatientBean patient3 = new PatientBean(3L, "Monica", "Carlita", LocalDate.of(2015, 5, 1), Gender.FEMALE, "St Toto", "213213213213");
+        List<NoteBean> notes= new ArrayList<>();
+        notes.add(new NoteBean("1234123", 3L, " Le patient a plus d'Hémoglobine et peu d' Anticorps ", LocalDate.of(1084, 9, 10)));
+        notes.add(new NoteBean("9876543", 3L, " The patient is Fumeur ", LocalDate.of(1084, 12, 12)));
+        when(patientProxy.getPatient(patient3.getId())).thenReturn(patient3);
+        when(noteProxy.getNoteByPatientId(patient3.getId())).thenReturn(notes);
+
+        //When
+        PatientBeanDto status = assessment.getRapportById(patient3.getId());
+        //Then
+        assertEquals(status.getRiskLevel().name(),"NONE");
+
+    }
+
+    @Test
+    void getRapportById_shouldResultGenderFemaleLessThirtyYearsResultTriggerTwo() {
+
+        //Given
+        PatientBean patient3 = new PatientBean(3L, "Geltrude", "Carlita", LocalDate.of(2000, 5, 1), Gender.FEMALE, "St Toto", "213213213213");
+        List<NoteBean> notes= new ArrayList<>();
+        notes.add(new NoteBean("1234123", 3L, " Le patient a plus d'Hémoglobine ", LocalDate.of(1084, 9, 10)));
+        when(patientProxy.getPatient(patient3.getId())).thenReturn(patient3);
+        when(noteProxy.getNoteByPatientId(patient3.getId())).thenReturn(notes);
+
+        //When
+        PatientBeanDto status = assessment.getRapportById(patient3.getId());
+        //Then
+        assertEquals(status.getRiskLevel().name(),"NONE");
+
+    }
+
 
 }
