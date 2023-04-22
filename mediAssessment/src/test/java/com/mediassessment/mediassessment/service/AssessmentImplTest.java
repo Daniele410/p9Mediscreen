@@ -33,7 +33,6 @@ class AssessmentImplTest {
 
     private PatientBean patient;
     private PatientBean patient2;
-
     private List<NoteBean> allNotes;
 
 
@@ -280,7 +279,7 @@ class AssessmentImplTest {
     }
 
     @Test
-    void getRapportById_shouldResultGenderFemaleLessThirtyYearsResultTriggerTwo() {
+    void getRapportById_shouldResultGenderFemaleLessThirtyYearsOldResultTriggerTwo() {
 
         //Given
         PatientBean patient3 = new PatientBean(3L, "Geltrude", "Carlita", LocalDate.of(2000, 5, 1), Gender.FEMALE, "St Toto", "213213213213");

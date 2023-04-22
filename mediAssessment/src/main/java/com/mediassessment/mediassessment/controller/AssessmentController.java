@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import static org.springframework.http.HttpStatus.OK;
 
+/**
+ * Assessment Controller
+ */
 @Controller
 public class AssessmentController {
 
@@ -19,6 +22,9 @@ public class AssessmentController {
      */
     private final Logger log = LoggerFactory.getLogger(AssessmentController.class);
 
+    /**
+     * Instance of IAssessmentService
+     */
     private final IAssessmentService assessmentService;
 
     public AssessmentController(IAssessmentService assessmentService) {
@@ -26,7 +32,11 @@ public class AssessmentController {
     }
 
 
-
+    /**
+     * method to get assessment
+     * @param id patient
+     * @return report of assessment
+     */
     @GetMapping("/assess")
     public ResponseEntity<PatientBeanDto> getRapportAssessmentById (@RequestParam Long id){
         log.info("get rapport by patientId :{} ", id);

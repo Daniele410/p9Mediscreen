@@ -3,6 +3,7 @@ package com.medinote.medinote.controller;
 import com.medinote.medinote.Exceptions.NoteNotFoundException;
 import com.medinote.medinote.model.Note;
 import com.medinote.medinote.service.INoteService;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -55,8 +56,8 @@ public class NoteController {
     }
 
     @PostMapping("/note")
-    public ResponseEntity<Note> addNote(@RequestBody Note note) {
-        log.info("save note :{}", note.getId());
+    public ResponseEntity<Note> addNote(@RequestBody @Valid Note note) {
+        log.info("save note :{} ", note.getId());
 
         return new ResponseEntity<>(noteService.saveNote(note), CREATED);
     }
@@ -86,7 +87,7 @@ public class NoteController {
     }
 
     @GetMapping("/noteByPatientId")
-    public ResponseEntity<List<Note>> getNoteByPatientId(@RequestParam Long id)  {
+    public ResponseEntity<List<Note>> getNoteByPatientId(@RequestParam Long id) throws NoteNotFoundException {
         log.info("get note by id :{} ", id);
         return new ResponseEntity<>(noteService.findNoteByPatientId(id), OK);
     }

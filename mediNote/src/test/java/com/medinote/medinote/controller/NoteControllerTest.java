@@ -111,7 +111,7 @@ class NoteControllerTest {
     }
 
     @Test
-    void getNoteByPatientId() {
+    void getNoteByPatientId() throws NoteNotFoundException {
         //Given
         List<Note> allNotes = List.of(
                 new Note("1234123", 1, "Bros", LocalDate.of(1084, 9, 10)));

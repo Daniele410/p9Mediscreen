@@ -129,7 +129,7 @@ class NoteServiceImplTest {
     }
 
     @Test
-    void findNoteByPatientId() {
+    void findNoteByPatientId() throws NoteNotFoundException {
         //Given
         List<Note> allNotes = List.of(
                 new Note("1234123", 1, "Bros", LocalDate.of(1084, 9, 10)),
@@ -141,6 +141,14 @@ class NoteServiceImplTest {
 
         //Then
         Assertions.assertEquals(noteResult.get(0).getDate(), LocalDate.of(1084, 9, 10));
+
+    }
+
+    @Test
+    void findNoteByPatientIdReturnException() throws NoteNotFoundException {
+
+        //Given // When //Then
+        assertThrows(NoteNotFoundException.class, () -> noteService.findNoteByPatientId(5L));
 
     }
 }

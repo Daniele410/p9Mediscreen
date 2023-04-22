@@ -16,5 +16,5 @@ public interface INoteService {
 
     Note deleteNote(String id) throws NoteNotFoundException;
 
-    List<Note> findNoteByPatientId(Long id);
+    List<Note> findNoteByPatientId(Long id) throws NoteNotFoundException;
 }

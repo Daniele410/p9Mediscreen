@@ -1,3 +1,6 @@
 /.idea/
 /.target/
 /.mvn/
+/ResultTriggerSix() {
+/tNoteBean notes= new ArrayList();
+/t
