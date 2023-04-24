@@ -144,11 +144,5 @@ class NoteServiceImplTest {
 
     }
 
-    @Test
-    void findNoteByPatientIdReturnException() throws NoteNotFoundException {
 
-        //Given // When //Then
-        assertThrows(NoteNotFoundException.class, () -> noteService.findNoteByPatientId(5L));
-
-    }
 }

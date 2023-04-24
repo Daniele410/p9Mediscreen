@@ -59,9 +59,7 @@ public class NoteServiceImpl implements INoteService {
     @Override
     public List<Note> findNoteByPatientId(Long id) throws NoteNotFoundException{
         List<Note> note = noteRepository.findByPatientId(id);
-        if (note.isEmpty()) {
-            throw new NoteNotFoundException("Patient Id: {} " + id + " not present in dataBase!");
-        }
+
         return note;
     }
 
