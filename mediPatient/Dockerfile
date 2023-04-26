@@ -4,7 +4,6 @@ FROM openjdk:19-jdk-alpine
 #Create a new app directory for my application files
 RUN mkdir /application
 
-
 #Set the direcotry for excution future commands
 WORKDIR /application
 

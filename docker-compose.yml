@@ -1,16 +1,93 @@
-version: '3.8'
+version: "3.9"
 
 services:
-  mysqldb:
-    image: mysql:8
-    container_name: mysqldb
-    ports:
-      - "3307:3306"
-    environment:
-      MYSQL_DATABASE: db_patient
-      MYSQL_USER: root
-      MYSQL_PASSWORD: rootroot
-    volumes:
-      - sql-data:/var/lib/mysql
-    networks:
+    mysqldb:
+      image: mysql:8
+      restart: unless-stopped
+      container_name: mysqldb
+      ports:
+        - "3307:3306"
+      environment:
+        MYSQL_ROOT_PASSWORD: rootroot
+        MYSQL_DATABASE: db_patient
+#      volumes:
+#        - sql-data:/var/lib/mysql
+      networks:
+          - mediscreen_network
+
+    patient:
+      depends_on:
+        - mysqldb
+      container_name: patient
+      image: patient
+      build: ./mediPatient/.
+      restart: on-failure
+      ports:
+        - "8081:8081"
+      environment:
+        MYSQL_DATABASE: db_patient
+        MYSQL_URL: mysqldb
+        MYSQL_USER: root
+        MYSQL_PASSWORD: rootroot
+      networks:
         - mediscreen_network
+
+
+    mongodb:
+      image: mongo
+      container_name: mongodb
+      ports:
+        - "27017:27017"
+      volumes:
+        - mongodb:/data/db
+      networks:
+        - mediscreen_network
+    note:
+        build: ./note/.
+        image: note
+        container_name: note
+        environment:
+          PATIENT_URL: patient:8081
+          MONGODB_HOST: mongodb
+          MONGODB_PORT: 27017
+          MONGODB_DB: note
+        depends_on:
+          - mongodb
+          - patient
+        ports:
+          - "8082:8082"
+        networks:
+          - mediscreen_network
+
+    assessment:
+        build: ./assessment/.
+        image: assessment
+        container_name: assessment
+        environment:
+          PATIENT_URL: patient:8081
+          NOTE_URL: note:8082
+        depends_on:
+          - note
+          - patient
+        ports:
+          - "8080:8080"
+        networks:
+          - mediscreen_network
+    ui:
+      build: ./clientUI/.
+      image: client_ui
+      container_name: client_ui
+      depends_on:
+        - note
+        - patient
+        - assessment
+      ports:
+        - "9000:9000"
+      networks:
+        - mediscreen_network
+networks:
+    mediscreen_network:
+      driver: bridge
+volumes:
+  sql-data:
+  mongodb:
