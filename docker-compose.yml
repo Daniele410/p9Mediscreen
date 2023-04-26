@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  mysqldb:
+    image: mysql:8
+    container_name: mysqldb
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_DATABASE: db_patient
+      MYSQL_USER: root
+      MYSQL_PASSWORD: rootroot
+    volumes:
+      - sql-data:/var/lib/mysql
+    networks:
+        - mediscreen_network

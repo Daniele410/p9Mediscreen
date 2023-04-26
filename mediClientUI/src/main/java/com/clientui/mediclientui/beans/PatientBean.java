@@ -13,15 +13,16 @@ import java.time.LocalDate;
 public class PatientBean {
 
     private Long id;
-    @NotBlank(message = "Type is mandatory")
+    @NotBlank(message = "FirstName is mandatory")
     @Size(min = 1, max = 50)
     private String firstName;
-    @NotBlank(message = "Type is mandatory")
+    @NotBlank(message = "LastName is mandatory")
     @Size(min = 1, max = 50)
     private String lastName;
     @NotNull(message = "Select your birthday")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthday;
+    @NotNull(message = "Select your Gender")
     private Gender gender;
     @Size(min = 0, max = 150)
     private String address;

@@ -57,7 +57,7 @@ public class NoteServiceImpl implements INoteService {
     }
 
     @Override
-    public List<Note> findNoteByPatientId(Long id) throws NoteNotFoundException{
+    public List<Note> findNoteByPatientId(Long id) {
         List<Note> note = noteRepository.findByPatientId(id);
 
         return note;
