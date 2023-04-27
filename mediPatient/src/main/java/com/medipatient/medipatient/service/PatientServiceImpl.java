@@ -1,13 +1,16 @@
 package com.medipatient.medipatient.service;
 
 import com.medipatient.medipatient.Exception.UserNotFoundException;
+import com.medipatient.medipatient.constant.Gender;
 import com.medipatient.medipatient.model.Patient;
+import com.medipatient.medipatient.model.dto.PatientDto;
 import com.medipatient.medipatient.repository.PatientRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -55,5 +58,6 @@ public class PatientServiceImpl implements IPatientService {
         patientRepository.delete(patientToDelete);
         return patientToDelete;
     }
+
 
 }

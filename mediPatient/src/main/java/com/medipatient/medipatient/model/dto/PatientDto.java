@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 
 public class PatientDto {
 
-    private long   id;
+    private Long id;
     @NotBlank(message = "required")
     /*
      * patient family name
@@ -27,7 +27,7 @@ public class PatientDto {
 
     public PatientDto() {
     }
-    public PatientDto(long id, String family, String given, String dob, String sex, String address, String phone) {
+    public PatientDto(Long id, String family, String given, String dob, String sex, String address, String phone) {
         this.id = id;
         this.family = family;
         this.given = given;
@@ -37,11 +37,11 @@ public class PatientDto {
         this.phone = phone;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
