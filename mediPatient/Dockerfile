@@ -10,4 +10,8 @@ WORKDIR /application
 #Copy the jar from host machine to image filesystem
 COPY target/*.jar patient.jar
 
+#Api port
+EXPOSE 8081
+
+#To run java application:
 ENTRYPOINT ["java","-jar","patient.jar"]

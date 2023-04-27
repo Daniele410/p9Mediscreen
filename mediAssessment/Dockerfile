@@ -10,5 +10,8 @@ WORKDIR /application
 #Copy the jar from host machine to image filesystem
 COPY target/*.jar assessment.jar
 
+#Api port
+EXPOSE 8080
 
+#To run java application:
 ENTRYPOINT ["java","-jar","assessment.jar"]

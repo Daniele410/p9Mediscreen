@@ -10,18 +10,17 @@ services:
       environment:
         MYSQL_ROOT_PASSWORD: rootroot
         MYSQL_DATABASE: db_patient
-#      volumes:
-#        - sql-data:/var/lib/mysql
+      volumes:
+        - sql-data:/var/lib/mysql
       networks:
           - mediscreen_network
 
     patient:
+      build: ./mediPatient/.
+      image: patient
+      container_name: patient
       depends_on:
         - mysqldb
-      container_name: patient
-      image: patient
-      build: ./mediPatient/.
-      restart: on-failure
       ports:
         - "8081:8081"
       environment:
@@ -31,7 +30,7 @@ services:
         MYSQL_PASSWORD: rootroot
       networks:
         - mediscreen_network
-
+      restart: on-failure
 
     mongodb:
       image: mongo
@@ -42,8 +41,9 @@ services:
         - mongodb:/data/db
       networks:
         - mediscreen_network
+
     note:
-        build: ./note/.
+        build: ./mediNote/.
         image: note
         container_name: note
         environment:
@@ -60,7 +60,7 @@ services:
           - mediscreen_network
 
     assessment:
-        build: ./assessment/.
+        build: ./mediAssessment/.
         image: assessment
         container_name: assessment
         environment:
@@ -74,15 +74,19 @@ services:
         networks:
           - mediscreen_network
     ui:
-      build: ./clientUI/.
+      build: ./mediClientUI/.
       image: client_ui
       container_name: client_ui
       depends_on:
         - note
         - patient
         - assessment
+#      environment:
+#        FEIGN_MEDIPATIENT_URL: http://mediPatient:8081
+#        FEIGN_MEDINOTE_URL: http://localhost:8082
+#        FEIGN_MEDIASSESSMENT_URL: http://localhost:8080
       ports:
-        - "9000:9000"
+        - "8090:8090"
       networks:
         - mediscreen_network
 networks:
