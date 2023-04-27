@@ -31,6 +31,12 @@ public class Note {
         this.date = date;
     }
 
+    public Note(Long patientId, String message) {
+        this.patientId = patientId;
+        this.message = message;
+
+    }
+
     public String getId() {
         return id;
     }
