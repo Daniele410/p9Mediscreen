@@ -1,19 +1,14 @@
 package com.medipatient.medipatient.curl;
 
-import ch.qos.logback.core.util.ContentTypeUtil;
 import com.medipatient.medipatient.constant.Gender;
-import com.medipatient.medipatient.controller.PatientController;
 import com.medipatient.medipatient.model.Patient;
 import com.medipatient.medipatient.model.dto.PatientDto;
 import com.medipatient.medipatient.service.IPatientService;
 import jakarta.validation.Valid;
-import jdk.jfr.ContentType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
