@@ -84,9 +84,12 @@ public class AssessmentServiceImpl implements IAssessmentService {
         String noteToStream = notes.stream()
                 .map(NoteBean::getMessage)
                 .map(String::trim)
+                .map(String::toUpperCase)
                 .collect(Collectors.joining());
 
+
         long nbTriggers = Arrays.stream(AssessmentTerminology.TERMINOLOGY.toArray(new String[0]))
+                .map(String::toUpperCase)
                 .filter(noteToStream::contains)
                 .distinct()
                 .count();

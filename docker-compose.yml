@@ -64,8 +64,8 @@ services:
         image: assessment
         container_name: assessment
         environment:
-          PATIENT_URL: patient:8081
-          NOTE_URL: note:8082
+          FEIGN_MEDIPATIENT_URL: http://mediPatient:8081
+          FEIGN_MEDINOTE_URL: http://localhost:8082
         depends_on:
           - note
           - patient
@@ -81,10 +81,10 @@ services:
         - note
         - patient
         - assessment
-#      environment:
-#        FEIGN_MEDIPATIENT_URL: http://mediPatient:8081
-#        FEIGN_MEDINOTE_URL: http://localhost:8082
-#        FEIGN_MEDIASSESSMENT_URL: http://localhost:8080
+      environment:
+        FEIGN_MEDIPATIENT_URL: http://mediPatient:8081
+        FEIGN_MEDINOTE_URL: http://localhost:8082
+        FEIGN_MEDIASSESSMENT_URL: http://localhost:8080
       ports:
         - "8090:8090"
       networks:

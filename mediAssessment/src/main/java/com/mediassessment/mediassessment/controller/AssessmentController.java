@@ -56,4 +56,14 @@ public class AssessmentController {
         return new ResponseEntity<>(report, OK);
     }
 
+    @PostMapping(value = "/assess/familyName")
+    public ResponseEntity<String> getCurlReportByFamilyName(Long patId) {
+        log.info(" get report request for patient id {} ",patId);
+        PatientBeanDto patientBeanDto = assessmentService.getRapportById(patId);
+        String report = "Patient : " + patientBeanDto.getFirstName() +
+                " (age :" + patientBeanDto.getAge() + ") diabetes assessment is: "
+                + patientBeanDto.getRiskLevel().toString();
+        return new ResponseEntity<>(report, OK);
+    }
+
 }
