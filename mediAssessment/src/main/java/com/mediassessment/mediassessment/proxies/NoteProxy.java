@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-@FeignClient(name = "mediNote", url = "localhost:8082")
+@FeignClient(name = "note", url = "${feign.mediNote.url}")
 public interface NoteProxy {
 
 
