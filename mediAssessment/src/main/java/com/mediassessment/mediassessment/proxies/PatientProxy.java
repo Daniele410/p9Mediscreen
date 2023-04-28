@@ -18,4 +18,8 @@ public interface PatientProxy {
     @GetMapping( value = "/patient/{id}")
     PatientBean getPatient(@RequestParam @PathVariable("id") long id);
 
+
+    @GetMapping( value = "/patient/familyName")
+    List<PatientBean> getPatientByFirstName(@RequestParam("familyName") String familyName);
+
 }

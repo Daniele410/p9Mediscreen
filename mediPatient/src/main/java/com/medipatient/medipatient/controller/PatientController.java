@@ -99,4 +99,16 @@ public class PatientController {
         return new ResponseEntity<>(patientService.deletePatient(id), OK);
     }
 
+
+    /**
+     * method to get patient by lastName
+     * @param familyName
+     * @return
+     */
+    @GetMapping("/patient/familyName")
+    public ResponseEntity<List<Patient>> getPatientByLastName(@RequestParam String familyName) {
+        log.info("get patient by lastname :{} request", familyName);
+        return new ResponseEntity<>(patientService.findByFirstName(familyName), OK);
+    }
+
 }

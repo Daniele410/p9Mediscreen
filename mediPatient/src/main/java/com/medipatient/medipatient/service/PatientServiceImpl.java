@@ -1,18 +1,18 @@
 package com.medipatient.medipatient.service;
 
 import com.medipatient.medipatient.Exception.UserNotFoundException;
-import com.medipatient.medipatient.constant.Gender;
 import com.medipatient.medipatient.model.Patient;
-import com.medipatient.medipatient.model.dto.PatientDto;
 import com.medipatient.medipatient.repository.PatientRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 
+/**
+ *
+ */
 @Service
 public class PatientServiceImpl implements IPatientService {
 
@@ -24,12 +24,21 @@ public class PatientServiceImpl implements IPatientService {
         this.patientRepository = patientRepository;
     }
 
+    /**
+     * @return all patient present in database
+     */
     @Override
     public List<Patient> getAllPatients() {
         log.info("get all patients");
         return patientRepository.findAll();
     }
 
+    /**
+     * method to find patient by id
+     * @param id
+     * @return
+     * @throws UserNotFoundException
+     */
     @Override
     public Patient findById(long id) throws UserNotFoundException {
         log.info("get patient by id: {}", id);
@@ -37,6 +46,11 @@ public class PatientServiceImpl implements IPatientService {
                 new UserNotFoundException("id user: {} " + id + " not found!"));
     }
 
+    /**
+     * method to save a patient
+     * @param patient
+     * @return
+     */
     @Override
     public Patient savePatient(Patient patient) {
         log.info("save patient: {} {}" + patient.getFirstName(),patient.getLastName());
@@ -51,6 +65,12 @@ public class PatientServiceImpl implements IPatientService {
         return patientRepository.save(patient);
     }
 
+    /**
+     * method to delete patient by patient id
+     * @param id
+     * @return
+     * @throws UserNotFoundException
+     */
     @Override
     public Patient deletePatient(long id) throws UserNotFoundException {
         log.info("patient with: {} " + id , " delete");
@@ -59,5 +79,16 @@ public class PatientServiceImpl implements IPatientService {
         return patientToDelete;
     }
 
+    /**
+     * method to find patient by firstname
+     * @param firstName
+     * @return
+     */
+    @Override
+    public List<Patient> findByFirstName(String firstName) {
+        log.info("patient with familyName: {} ", firstName);
+        return patientRepository.findByFirstName(firstName);
+
+    }
 
 }

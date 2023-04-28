@@ -6,4 +6,6 @@ public interface IAssessmentService {
 
 
     PatientBeanDto getRapportById(Long patientId);
+
+    PatientBeanDto getRapportByFamilyName(String familyName);
 }

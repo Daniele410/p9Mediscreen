@@ -17,4 +17,5 @@ public interface IPatientService {
 
     Patient deletePatient(long id) throws UserNotFoundException;
 
+    List<Patient> findByFirstName(String firstName);
 }

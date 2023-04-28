@@ -111,5 +111,15 @@ public class AssessmentServiceImpl implements IAssessmentService {
         return rapport;
     }
 
+    @Override
+    public PatientBeanDto getRapportByFamilyName(String familyName) {
+        List<PatientBean> patients = patientProxy.getPatientByFirstName(familyName);
+        PatientBean patient = patients.get(0);
+        List<NoteBean> notes = noteProxy.getNoteByPatientId(patient.getId());
+        RiskLevel status = calculRisks(patient, notes);
+        PatientBeanDto rapport = new PatientBeanDto(patient.getFirstName(), patient.getLastName(), getPatientAge(patient), patient.getGender(), status);
+        return rapport;
+    }
+
 
 }
