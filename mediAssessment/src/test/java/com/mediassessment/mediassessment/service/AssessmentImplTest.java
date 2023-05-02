@@ -296,4 +296,23 @@ class AssessmentImplTest {
     }
 
 
+    @Test
+    void getRapportByFamilyName_shouldResultRapport() {
+
+        //Given
+        PatientBean patient3 = new PatientBean(3L, "Geltrude", "Carlita", LocalDate.of(2000, 5, 1), Gender.FEMALE, "St Toto", "213213213213");
+        List<NoteBean> notes= new ArrayList<>();
+        List<PatientBean> patients = new ArrayList<>();
+        patients.add(patient3);
+        notes.add(new NoteBean("1234123", 3L, " Le patient a plus d' Hemoglobin ", LocalDate.of(1084, 9, 10)));
+        when(patientProxy.getPatientByFirstName(patient3.getFirstName())).thenReturn(patients);
+        when(noteProxy.getNoteByPatientId(patient3.getId())).thenReturn(notes);
+
+        //When
+        PatientBeanDto status = assessment.getRapportByFamilyName(patient3.getFirstName());
+        //Then
+        assertEquals(status.getRiskLevel().name(),"NONE");
+
+    }
+
 }

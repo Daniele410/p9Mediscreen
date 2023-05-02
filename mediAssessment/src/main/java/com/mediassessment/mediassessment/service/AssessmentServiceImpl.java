@@ -111,6 +111,11 @@ public class AssessmentServiceImpl implements IAssessmentService {
         return rapport;
     }
 
+    /**
+     * Get rapport risk whit patient familyName
+     * @param familyName
+     * @return rapport of risk level
+     */
     @Override
     public PatientBeanDto getRapportByFamilyName(String familyName) {
         List<PatientBean> patients = patientProxy.getPatientByFirstName(familyName);

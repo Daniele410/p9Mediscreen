@@ -167,7 +167,7 @@ public class MediClientUIController {
 
     }
 
-    @GetMapping(value = "/patient/assessment/{id}")
+    @GetMapping(value = "/patient/assess/{id}")
     public String patientAssessment(@PathVariable Long id, Model model, @ModelAttribute("patient") PatientBean patientBean) {
 
         patientBean = patientProxy.getPatient(id);
