@@ -2,7 +2,10 @@ package com.clientui.mediclientui.controller;
 
 import com.clientui.mediclientui.beans.NoteBean;
 import com.clientui.mediclientui.beans.PatientBean;
+import com.clientui.mediclientui.beans.dto.PatientBeanDto;
 import com.clientui.mediclientui.constant.Gender;
+import com.clientui.mediclientui.constant.RiskLevel;
+import com.clientui.mediclientui.proxies.AssessmentProxy;
 import com.clientui.mediclientui.proxies.NoteProxy;
 import com.clientui.mediclientui.proxies.PatientProxy;
 import org.junit.jupiter.api.Test;
@@ -10,6 +13,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
@@ -28,6 +32,9 @@ class MediClientUIControllerTest {
 
     @Mock
     NoteProxy noteProxy;
+
+    @Mock
+    AssessmentProxy assessmentProxy;
 
     @InjectMocks
     private MediClientUIController mediClientUIController;
@@ -132,7 +139,7 @@ class MediClientUIControllerTest {
 
         //When
 
-        String result = mediClientUIController.showUpdateForm(1, mock(org.springframework.ui.Model.class));
+        String result = mediClientUIController.showUpdateForm(1, mock(org.springframework.ui.Model.class),patient);
 
         //Then
         assertEquals("patientUpdateForm", result);
@@ -175,7 +182,7 @@ class MediClientUIControllerTest {
         String result = mediClientUIController.updatePatient(1, patient, bindingResult, mock(org.springframework.ui.Model.class));
 
         //Then
-        assertEquals("redirect:/patientUpdateForm?error", result);
+        assertEquals("redirect:/patientUpdateForm/{id}?error", result);
         verify(bindingResult, times(1)).hasErrors();
     }
 
@@ -349,6 +356,24 @@ class MediClientUIControllerTest {
         //Then
         assertEquals("redirect:/patient/note/"+noteBean1.getPatientId()+"?successDelete", result);
 
+
+    }
+
+    @Test
+    void patientAssessment_ShouldReturnModifiedModelAndView() {
+        //Given
+        PatientBean patient = new PatientBean(1L, "Piero", "Brow", LocalDate.of(1084, 9, 10), Gender.MALE, "St Toto", "213213213213");
+        PatientBeanDto assessment = new PatientBeanDto(patient.getFirstName(),patient.getLastName(),38,patient.getGender(),RiskLevel.BORDERLINE);
+        when(patientProxy.getPatient(1L)).thenReturn(patient);
+        when(assessmentProxy.getRapportAssessmentById(1L)).thenReturn(ResponseEntity.ok(assessment));
+
+        //When
+        String result = mediClientUIController.patientAssessment(1L,mock(org.springframework.ui.Model.class),patient);
+
+        //Then
+        assertEquals("patientAssessment", result);
+        verify(patientProxy).getPatient(patient.getId());
+        verify(assessmentProxy).getRapportAssessmentById(patient.getId());
 
     }
 

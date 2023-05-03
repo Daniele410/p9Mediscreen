@@ -17,7 +17,6 @@ import static org.springframework.http.HttpStatus.CREATED;
 /**
  * NoteCurlController
  */
-
 @RestController
 @RequestMapping
 public class NoteCurlController {

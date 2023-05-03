@@ -68,9 +68,9 @@ public class MediClientUIController {
     }
 
     @GetMapping(value = "/patientUpdateForm/{id}")
-    public String showUpdateForm(@PathVariable("id") long id, Model model) {
+    public String showUpdateForm(@PathVariable("id") long id, Model model, PatientBean patient) {
         logger.debug("get request patient/update/{}", id);
-        PatientBean patient = patientProxy.getPatient(id);
+        patient = patientProxy.getPatient(id);
         logger.info("show updatePatient form");
         model.addAttribute("patient", patient);
         return "patientUpdateForm";
@@ -79,7 +79,7 @@ public class MediClientUIController {
     @PostMapping(value = "/patientUpdateForm/{id}")
     public String updatePatient(@PathVariable("id") long id, @Valid @RequestBody @ModelAttribute("patient") PatientBean patientBean, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            return "redirect:/patientUpdateForm?error";
+            return "redirect:/patientUpdateForm/{id}?error";
         }
 
         patientProxy.updatePatient(patientBean);
@@ -141,7 +141,6 @@ public class MediClientUIController {
         noteBean = noteProxy.getNoteById(id);
         model.addAttribute("note",noteBean);
         logger.info("show noteUpdateForm");
-
         return "noteUpdateForm";
     }
 

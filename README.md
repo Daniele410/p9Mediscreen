@@ -31,7 +31,7 @@ To run Mediscreen Application:
 
 2. Download the files that make up the project 
 
-3. At the root of the project run this command via terminal the jar files for each microservice : `mvn clean install`
+3. At the root of the project run this command via terminal the jar files for each microservice : `mvn install`
 
 4. At the root of the project run this command via terminal to trigger docker-compose : `docker-compose up -d`
 
