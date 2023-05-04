@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+/**
+ *
+ */
 @Controller
 public class MediClientUIController {
 
@@ -59,7 +62,7 @@ public class MediClientUIController {
     @PostMapping("/patientForm")
     public String registerPatient(@Valid @RequestBody @ModelAttribute("patient")  PatientBean patientBean, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "/patientForm";
+            return "redirect:/patientForm?error";
         }
         patientProxy.createPatient(patientBean);
         logger.info("save patient");

@@ -126,7 +126,7 @@ class MediClientUIControllerTest {
         String result = mediClientUIController.registerPatient(patient, bindingResult);
 
         //Then
-        assertEquals("/patientForm", result);
+        assertEquals("redirect:/patientForm?error", result);
         verify(bindingResult, times(1)).hasErrors();
     }
 

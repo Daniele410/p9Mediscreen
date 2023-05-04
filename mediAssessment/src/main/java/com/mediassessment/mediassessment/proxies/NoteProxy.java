@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
-
+/**
+ * Interface to connect mediNote
+ */
 @FeignClient(name = "note", url = "${feign.mediNote.url}")
 public interface NoteProxy {
 

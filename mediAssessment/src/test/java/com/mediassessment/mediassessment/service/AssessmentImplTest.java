@@ -95,6 +95,7 @@ class AssessmentImplTest {
         notes.add(new NoteBean("9876543", 1L, "The patient is Smoker", LocalDate.of(1084, 12, 12)));
         when(patientProxy.getPatient(patient.getId())).thenReturn(patient);
         when(noteProxy.getNoteByPatientId(patient.getId())).thenReturn(notes);
+
         //When
         PatientBeanDto status = assessment.getRapportById(patient.getId());
 
@@ -112,6 +113,7 @@ class AssessmentImplTest {
         notes.add(new NoteBean("9876543", 2L, "The patient is Smoker", LocalDate.of(1084, 12, 12)));
         when(patientProxy.getPatient(patient2.getId())).thenReturn(patient2);
         when(noteProxy.getNoteByPatientId(patient2.getId())).thenReturn(notes);
+
         //When
         PatientBeanDto status = assessment.getRapportById(patient2.getId());
 
@@ -131,6 +133,7 @@ class AssessmentImplTest {
 
         when(patientProxy.getPatient(patient.getId())).thenReturn(patient);
         when(noteProxy.getNoteByPatientId(patient.getId())).thenReturn(notes);
+
         //When
         PatientBeanDto status = assessment.getRapportById(patient.getId());
 
@@ -152,11 +155,11 @@ class AssessmentImplTest {
 
         when(patientProxy.getPatient(patient3.getId())).thenReturn(patient3);
         when(noteProxy.getNoteByPatientId(patient3.getId())).thenReturn(notes);
+
         //When
         PatientBeanDto status = assessment.getRapportById(patient3.getId());
 
         //Then
-
         assertEquals(status.getRiskLevel().name(),"IN_DANGER");
 
     }
@@ -176,7 +179,6 @@ class AssessmentImplTest {
         PatientBeanDto status = assessment.getRapportById(patient3.getId());
 
         //Then
-
         assertEquals(status.getRiskLevel().name(),"EARLY_ONSET");
 
     }
@@ -197,7 +199,6 @@ class AssessmentImplTest {
         PatientBeanDto status = assessment.getRapportById(patient3.getId());
 
         //Then
-
         assertEquals(status.getRiskLevel().name(),"IN_DANGER");
 
     }
@@ -205,7 +206,6 @@ class AssessmentImplTest {
     @Test
     void getRapportById_shouldResultTriggerEight() {
         //Given
-
         List<NoteBean> notes= new ArrayList<>();
         notes.add(new NoteBean("1234123", 1L, " Le patient a plus d'Hemoglobin et peu d' Antibody ", LocalDate.of(1084, 9, 10)));
         notes.add(new NoteBean("9876543", 1L, " The patient is Smoker et gain de Weight n/ ", LocalDate.of(1084, 12, 12)));
@@ -300,11 +300,18 @@ class AssessmentImplTest {
     void getRapportByFamilyName_shouldResultRapport() {
 
         //Given
-        PatientBean patient3 = new PatientBean(3L, "Geltrude", "Carlita", LocalDate.of(2000, 5, 1), Gender.FEMALE, "St Toto", "213213213213");
+        PatientBean patient3 = new PatientBean();
+        patient3.setId(3L);
+        patient3.setFirstName("Geltrude");
+        patient3.setLastName("Carlita");
+        patient3.setBirthday(LocalDate.of(2000, 5, 1));
+        patient3.setGender( Gender.FEMALE);
+        patient3.setAddress("St Toto");
+        patient3.setPhone("213213213213");
         List<NoteBean> notes= new ArrayList<>();
         List<PatientBean> patients = new ArrayList<>();
         patients.add(patient3);
-        notes.add(new NoteBean("1234123", 3L, " Le patient a plus d' Hemoglobin ", LocalDate.of(1084, 9, 10)));
+        notes.add(new NoteBean("1234123", patient3.getId(), " Le patient a plus d' Hemoglobin ", LocalDate.of(2022, 9, 10)));
         when(patientProxy.getPatientByFirstName(patient3.getFirstName())).thenReturn(patients);
         when(noteProxy.getNoteByPatientId(patient3.getId())).thenReturn(notes);
 

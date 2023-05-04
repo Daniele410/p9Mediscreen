@@ -5,7 +5,9 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+/**
+ * Interface to connect mediNote
+ */
 @FeignClient(name = "note", url = "${feign.mediNote.url}")
 public interface NoteProxy {
 

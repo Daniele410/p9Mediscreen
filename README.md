@@ -1,5 +1,5 @@
 # p9Mediscreen
-application specialized in detecting risk factors for disease!
+Application specialized in detecting risk factors for disease!
 
 Mediscreen is an application that allows to detect a level of risk of diabetes in a patient, based on his age, his sex and the different notes left by the doctor
 
@@ -50,18 +50,12 @@ To run Mediscreen Application:
 
 1. Microservice architecture
 
-   ![](img/MCArchi.png)
+ 
 
 2. Docker architecture
 
 
-![](img/docker.png)
 
 ---------
-## Reports
+## Reports Jacoco
 
-![](img/patientJacoco.png)
-
-![](img/noteJacoco.png)
-
-![](img/assessmentJacoco.png)
