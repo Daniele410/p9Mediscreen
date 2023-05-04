@@ -1,6 +1,5 @@
 package com.mediassessment.mediassessment.curl;
 
-import com.mediassessment.mediassessment.beans.PatientBean;
 import com.mediassessment.mediassessment.beans.dto.PatientBeanDto;
 import com.mediassessment.mediassessment.constant.Gender;
 import com.mediassessment.mediassessment.constant.RiskLevel;
@@ -13,7 +12,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -50,7 +49,7 @@ class AssessmentCurlControllerTest {
     }
 
     @Test
-    void getCurlReportByFamilyName() {
+    void getCurlReportByFamilyName()  {
         //Given
         PatientBeanDto patientBean = new PatientBeanDto();
         patientBean.setFirstName("Turiddu");
@@ -70,4 +69,6 @@ class AssessmentCurlControllerTest {
                 + patientBean.getRiskLevel().toString(), response.getBody().toString());
 
     }
+
+
 }

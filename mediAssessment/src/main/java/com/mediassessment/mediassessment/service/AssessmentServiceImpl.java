@@ -10,7 +10,9 @@ import com.mediassessment.mediassessment.proxies.NoteProxy;
 import com.mediassessment.mediassessment.proxies.PatientProxy;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -117,7 +119,7 @@ public class AssessmentServiceImpl implements IAssessmentService {
      * @return rapport of risk level
      */
     @Override
-    public PatientBeanDto getRapportByFamilyName(String familyName) {
+    public PatientBeanDto getRapportByFamilyName(String familyName)  {
         List<PatientBean> patients = patientProxy.getPatientByFirstName(familyName);
         PatientBean patient = patients.get(0);
         List<NoteBean> notes = noteProxy.getNoteByPatientId(patient.getId());

@@ -1,16 +1,13 @@
 package com.medipatient.medipatient.controller;
 
-import com.medipatient.medipatient.Exception.UserNotFoundException;
+import com.medipatient.medipatient.Exception.PatientNotFoundException;
 import com.medipatient.medipatient.constant.Gender;
 import com.medipatient.medipatient.model.Patient;
-import com.medipatient.medipatient.service.IPatientService;
 import com.medipatient.medipatient.service.PatientServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.http.HttpStatus;
@@ -59,7 +56,7 @@ class PatientControllerTest {
 
 
     @Test
-    void getPatientByIdShouldReturnModifiedModelAndView() throws UserNotFoundException {
+    void getPatientByIdShouldReturnModifiedModelAndView() throws PatientNotFoundException {
         //Given
         List<Patient> patientsList = new ArrayList<>();
         Patient patient = new Patient(1L, "Piero", "Brow", LocalDate.of(1084, 9, 10), Gender.MALE, "St Toto", "213213213213");
@@ -77,7 +74,7 @@ class PatientControllerTest {
     }
 
     @Test
-    void getPatientByIdForUiShouldReturnModifiedModelAndView() throws UserNotFoundException {
+    void getPatientByIdForUiShouldReturnModifiedModelAndView() throws PatientNotFoundException {
         //Given
         List<Patient> patientsList = new ArrayList<>();
         Patient patient = new Patient(1L, "Piero", "Brow", LocalDate.of(1084, 9, 10), Gender.MALE, "St Toto", "213213213213");
@@ -95,7 +92,7 @@ class PatientControllerTest {
     }
 
     @Test
-    void updatePatientShouldReturnModifiedModelAndView() throws UserNotFoundException {
+    void updatePatientShouldReturnModifiedModelAndView() throws PatientNotFoundException {
         //Given
         List<Patient> patientsList = new ArrayList<>();
         Patient patient = new Patient(1L, "Piero", "Brow", LocalDate.of(1084, 9, 10), Gender.MALE, "St Toto", "213213213213");
@@ -113,7 +110,7 @@ class PatientControllerTest {
     }
 
     @Test
-    void addPatientShouldReturnModifiedModelAndView() throws UserNotFoundException {
+    void addPatientShouldReturnModifiedModelAndView() throws PatientNotFoundException {
         //Given
         List<Patient> patientsList = new ArrayList<>();
         Patient patient = new Patient(1L, "Piero", "Brow", LocalDate.of(1084, 9, 10), Gender.MALE, "St Toto", "213213213213");
@@ -131,7 +128,7 @@ class PatientControllerTest {
     }
 
     @Test
-    void deletePatientShouldReturnModifiedModelAndView() throws UserNotFoundException {
+    void deletePatientShouldReturnModifiedModelAndView() throws PatientNotFoundException {
         //Given
         List<Patient> patientsList = new ArrayList<>();
         Patient patient = new Patient(1L, "Piero", "Brow", LocalDate.of(1084, 9, 10), Gender.MALE, "St Toto", "213213213213");
@@ -149,7 +146,7 @@ class PatientControllerTest {
     }
 
     @Test
-    void deletePatientShouldReturnModifiedModelAndView2() throws UserNotFoundException {
+    void deletePatientShouldReturnModifiedModelAndView2() throws PatientNotFoundException {
         //Given
         List<Patient> patientsList = new ArrayList<>();
         Patient patient = new Patient();
@@ -173,7 +170,7 @@ class PatientControllerTest {
     }
 
     @Test
-    void getPatientByLastNameShouldReturnModifiedModelAndView() throws UserNotFoundException {
+    void getPatientByLastNameShouldReturnModifiedModelAndView() throws PatientNotFoundException {
         //Given
         List<Patient> patientsList = new ArrayList<>();
         Patient patient = new Patient();

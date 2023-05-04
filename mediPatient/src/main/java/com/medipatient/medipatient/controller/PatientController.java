@@ -1,6 +1,6 @@
 package com.medipatient.medipatient.controller;
 
-import com.medipatient.medipatient.Exception.UserNotFoundException;
+import com.medipatient.medipatient.Exception.PatientNotFoundException;
 import com.medipatient.medipatient.model.Patient;
 import com.medipatient.medipatient.service.IPatientService;
 import com.medipatient.medipatient.service.PatientServiceImpl;
@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -51,16 +50,16 @@ public class PatientController {
      *
      * @param id
      * @return patient
-     * @throws UserNotFoundException
+     * @throws PatientNotFoundException
      */
     @GetMapping("/patient")
-    public ResponseEntity<Patient> getPatientById( @RequestParam Long id) throws UserNotFoundException {
+    public ResponseEntity<Patient> getPatientById( @RequestParam Long id) throws PatientNotFoundException {
         log.info("get patient by id :{} ", id);
         return new ResponseEntity<>(patientService.findById(id), OK);
     }
 
     @GetMapping("/patient/{id}")
-    public ResponseEntity<Patient> getPatientByIdForUi(@PathVariable @RequestParam Long id) throws UserNotFoundException {
+    public ResponseEntity<Patient> getPatientByIdForUi(@PathVariable @RequestParam Long id) throws PatientNotFoundException {
         log.info("get patient by id :{} ", id);
         return new ResponseEntity<>(patientService.findById(id), OK);
     }
@@ -71,7 +70,7 @@ public class PatientController {
      * @return patient update
      */
     @PutMapping("/patient")
-    public ResponseEntity<Patient> updatePatient(@RequestBody @Valid Patient patient) throws UserNotFoundException {
+    public ResponseEntity<Patient> updatePatient(@RequestBody @Valid Patient patient) throws PatientNotFoundException {
         log.info("update patient with id :{} ", patient.getId());
         return new ResponseEntity<>(patientService.updatePatient(patient), OK );
     }
@@ -91,10 +90,10 @@ public class PatientController {
      * delete method to delete patient by id
      * @param id
      * @return OK
-     * @throws UserNotFoundException
+     * @throws PatientNotFoundException
      */
     @GetMapping(value = "/patientDelete/{id}")
-    public ResponseEntity<Patient> deletePatient(@PathVariable long id) throws UserNotFoundException {
+    public ResponseEntity<Patient> deletePatient(@PathVariable long id) throws PatientNotFoundException {
         log.info("remove patient with id:{}", id);
         return new ResponseEntity<>(patientService.deletePatient(id), OK);
     }

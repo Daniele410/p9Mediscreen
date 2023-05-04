@@ -1,6 +1,6 @@
 package com.medipatient.medipatient.service;
 
-import com.medipatient.medipatient.Exception.UserNotFoundException;
+import com.medipatient.medipatient.Exception.PatientNotFoundException;
 import com.medipatient.medipatient.model.Patient;
 import com.medipatient.medipatient.repository.PatientRepository;
 import org.slf4j.Logger;
@@ -37,13 +37,13 @@ public class PatientServiceImpl implements IPatientService {
      * method to find patient by id
      * @param id
      * @return
-     * @throws UserNotFoundException
+     * @throws PatientNotFoundException
      */
     @Override
-    public Patient findById(long id) throws UserNotFoundException {
+    public Patient findById(long id) throws PatientNotFoundException {
         log.info("get patient by id: {}", id);
         return patientRepository.findById(id).orElseThrow(()->
-                new UserNotFoundException("id user: {} " + id + " not found!"));
+                new PatientNotFoundException("id user: {} " + id + " not found!"));
     }
 
     /**
@@ -58,10 +58,10 @@ public class PatientServiceImpl implements IPatientService {
     }
 
     @Override
-    public Patient updatePatient(Patient patient) throws UserNotFoundException {
+    public Patient updatePatient(Patient patient) throws PatientNotFoundException {
         log.info("update patient: {} {}" + patient.getFirstName(), patient.getLastName());
         patientRepository.findById(patient.getId()).orElseThrow(()->
-                new UserNotFoundException("id patient: {} " + patient.getId() + " not found!"));
+                new PatientNotFoundException("id patient: {} " + patient.getId() + " not found!"));
         return patientRepository.save(patient);
     }
 
@@ -69,10 +69,10 @@ public class PatientServiceImpl implements IPatientService {
      * method to delete patient by patient id
      * @param id
      * @return
-     * @throws UserNotFoundException
+     * @throws PatientNotFoundException
      */
     @Override
-    public Patient deletePatient(long id) throws UserNotFoundException {
+    public Patient deletePatient(long id) throws PatientNotFoundException {
         log.info("patient with: {} " + id , " delete");
         Patient patientToDelete = findById(id);
         patientRepository.delete(patientToDelete);

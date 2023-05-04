@@ -19,7 +19,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -297,7 +297,7 @@ class AssessmentImplTest {
 
 
     @Test
-    void getRapportByFamilyName_shouldResultRapport() {
+    void getRapportByFamilyName_shouldResultRapport()  {
 
         //Given
         PatientBean patient3 = new PatientBean();

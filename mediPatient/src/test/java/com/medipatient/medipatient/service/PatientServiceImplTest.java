@@ -1,6 +1,6 @@
 package com.medipatient.medipatient.service;
 
-import com.medipatient.medipatient.Exception.UserNotFoundException;
+import com.medipatient.medipatient.Exception.PatientNotFoundException;
 import com.medipatient.medipatient.constant.Gender;
 import com.medipatient.medipatient.model.Patient;
 import com.medipatient.medipatient.repository.PatientRepository;
@@ -59,7 +59,7 @@ class PatientServiceImplTest {
     }
 
     @Test
-    void findById() throws UserNotFoundException {
+    void findById() throws PatientNotFoundException {
         //Given
         Patient patient = new Patient();
         patient.setId(1L);
@@ -75,9 +75,9 @@ class PatientServiceImplTest {
     }
 
     @Test
-    void findByIdShouldReturnException() throws UserNotFoundException {
+    void findByIdShouldReturnException() throws PatientNotFoundException {
         //Given // When //Then
-        assertThrows(UserNotFoundException.class, () -> patientService.findById(3));
+        assertThrows(PatientNotFoundException.class, () -> patientService.findById(3));
 
     }
 
@@ -99,7 +99,7 @@ class PatientServiceImplTest {
     }
 
     @Test
-    void updatePatient() throws UserNotFoundException {
+    void updatePatient() throws PatientNotFoundException {
         //Given
         List<Patient> patientList = new ArrayList<>();
         patient.setId(1L);
@@ -115,13 +115,13 @@ class PatientServiceImplTest {
     }
 
     @Test
-    void updatePatientShouldReturnException() throws UserNotFoundException {
+    void updatePatientShouldReturnException() throws PatientNotFoundException {
         //Given // When //Then
-        assertThrows(UserNotFoundException.class, () -> patientService.updatePatient(patient));
+        assertThrows(PatientNotFoundException.class, () -> patientService.updatePatient(patient));
     }
 
     @Test
-    void deletePatient() throws UserNotFoundException {
+    void deletePatient() throws PatientNotFoundException {
         //Given
         Patient patient = new Patient();
         patient.setId(1L);
