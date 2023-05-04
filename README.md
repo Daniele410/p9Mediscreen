@@ -49,10 +49,13 @@ To run Mediscreen Application:
 
 
 1. Microservice architecture
-
+   
+![](images/MicroservicesArchitecture.png)
  
 
 2. Docker architecture
+
+![](images/DockerArchitecture.png)
 
 
 

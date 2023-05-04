@@ -135,4 +135,27 @@ class PatientServiceImplTest {
         verify(patientRepository).findById(1L);
 
     }
+
+    @Test
+    void findByFirstName() {
+        //Given
+        Patient patient = new Patient();
+        patient.setId(1L);
+        patient.setFirstName("Jimmy");
+        patient.setLastName("Bros");
+        patient.setBirthday(LocalDate.of(1084, 9, 10));
+        patient.setGender(Gender.MALE);
+        patient.setAddress("St Toto");
+        patient.setPhone("0678954422");
+        List<Patient> patients = new ArrayList<>();
+        patients.add(patient);
+        when(patientRepository.findByFirstName(patient.getFirstName())).thenReturn(patients);
+
+        //When
+        List<Patient> patientFind = patientService.findByFirstName("Jimmy");
+
+        //Then
+        Assertions.assertEquals(patientFind.get(0).getFirstName(), "Jimmy");
+
+    }
 }

@@ -53,14 +53,8 @@ class PatientCurlControllerTest {
     @Test
     void addPatientCurlShouldReturnModifiedModelAndViewCaseFemale() {
         //Given
-        PatientDto patientDto=new PatientDto();
-        patientDto.setId(1L);
-        patientDto.setFamily("Mariottide");
-        patientDto.setGiven("Nando");
-        patientDto.setDob("1954-10-23");
-        patientDto.setAddress("my address");
-        patientDto.setPhone("000111333222");
-        patientDto.setSex(String.valueOf(Gender.FEMALE));
+        PatientDto patientDto=new PatientDto(1L,"Mariottide","Nando","1954-10-23",String.valueOf(Gender.FEMALE),"my address","000111333222");
+
         Patient patient = new Patient(patientDto.getId(), patientDto.getFamily(), patientDto.getGiven(),  LocalDate.parse(patientDto.getDob()), Gender.FEMALE, patientDto.getAddress(), patientDto.getPhone());
         when(patientService.savePatient(any(Patient.class))).thenReturn(patient);
 

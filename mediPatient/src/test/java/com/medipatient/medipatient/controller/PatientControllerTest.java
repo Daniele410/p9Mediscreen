@@ -172,4 +172,31 @@ class PatientControllerTest {
         assertEquals(patient, response.getBody());
     }
 
+    @Test
+    void getPatientByLastNameShouldReturnModifiedModelAndView() throws UserNotFoundException {
+        //Given
+        List<Patient> patientsList = new ArrayList<>();
+        Patient patient = new Patient();
+        patient.setId(1L);
+        patient.setFirstName("Piero");
+        patient.setLastName("Brow");
+        patient.setBirthday(LocalDate.of(1084, 9, 10));
+        patient.setGender(Gender.MALE);
+        patient.setAddress("St Toto");
+        patient.setPhone("123123123");
+        patientsList.add(patient);
+        patientsList.add(patient);
+        List<Patient> patients = new ArrayList<>();
+        patients.add(patient);
+
+        when(patientService.findByFirstName(patient.getFirstName())).thenReturn(patients);
+
+        //When
+        ResponseEntity<List<Patient>> response = patientController.getPatientByLastName("Piero");
+
+        //Then
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(patients, response.getBody());
+    }
+
 }
