@@ -16,8 +16,7 @@ Mediscreen is an application that allows to detect a level of risk of diabetes i
 8.  Spring Cloud openfeign
 9.  H2
 10. Thymeleaf
-11. Agile
-12. Docker
+11. Docker
 
 ---------
 
