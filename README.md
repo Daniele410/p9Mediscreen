@@ -62,3 +62,11 @@ To run Mediscreen Application:
 ---------
 ## Reports Jacoco
 
+1. Report mediClientUi
+   ![](images/mediClientUiReportJacoco.png)
+2. Report mediPatient
+      ![](images/mediPatientReportJacoco.png)
+3. Report mediNote
+      ![](images/mediNoteReportJacoco.png)
+4. Report mediAssessment
+      ![](images/mediAssessmentReportJacoco.png)
