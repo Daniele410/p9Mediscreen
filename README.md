@@ -1,5 +1,5 @@
 # p9Mediscreen
-Application specialized in detecting risk factors for disease!
+Application specialized in detecting risk factors for a disease!
 
 Mediscreen is an application that allows to detect a level of risk of diabetes in a patient, based on his age, his sex and the different notes left by the doctor
 
