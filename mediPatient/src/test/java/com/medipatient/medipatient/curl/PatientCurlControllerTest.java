@@ -19,6 +19,9 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+/**
+ * Tests PatientCurlControllerTest
+ */
 @ExtendWith(MockitoExtension.class)
 class PatientCurlControllerTest {
     @InjectMocks
@@ -37,8 +40,7 @@ class PatientCurlControllerTest {
         patientDto.setAddress("my address");
         patientDto.setPhone("000111333222");
         patientDto.setSex(String.valueOf(Gender.MALE));
-        Patient patient = new Patient(patientDto.getId(), patientDto.getFamily(), patientDto.getGiven(),  LocalDate.parse(patientDto.getDob()), patientDto.getSex()
-                .equalsIgnoreCase("F") ? Gender.FEMALE : Gender.MALE, patientDto.getAddress(), patientDto.getPhone());
+        Patient patient = new Patient(patientDto.getId(), patientDto.getFamily(), patientDto.getGiven(),  LocalDate.parse(patientDto.getDob()),Gender.MALE, patientDto.getAddress(), patientDto.getPhone());
        when(patientService.savePatient(any(Patient.class))).thenReturn(patient);
 
        //When
@@ -59,8 +61,7 @@ class PatientCurlControllerTest {
         patientDto.setAddress("my address");
         patientDto.setPhone("000111333222");
         patientDto.setSex(String.valueOf(Gender.FEMALE));
-        Patient patient = new Patient(patientDto.getId(), patientDto.getFamily(), patientDto.getGiven(),  LocalDate.parse(patientDto.getDob()), patientDto.getSex()
-                .equalsIgnoreCase("F") ? Gender.FEMALE : Gender.MALE, patientDto.getAddress(), patientDto.getPhone());
+        Patient patient = new Patient(patientDto.getId(), patientDto.getFamily(), patientDto.getGiven(),  LocalDate.parse(patientDto.getDob()), Gender.FEMALE, patientDto.getAddress(), patientDto.getPhone());
         when(patientService.savePatient(any(Patient.class))).thenReturn(patient);
 
         //When

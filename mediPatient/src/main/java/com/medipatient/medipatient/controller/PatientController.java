@@ -19,7 +19,7 @@ import static org.springframework.http.HttpStatus.OK;
 /**
  * PatientController
  */
-@Controller
+@RestController
 public class PatientController {
     /**
      * SLF4J Logger instance.

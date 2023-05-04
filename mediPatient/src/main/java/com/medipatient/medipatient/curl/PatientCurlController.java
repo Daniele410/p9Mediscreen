@@ -36,9 +36,13 @@ public class PatientCurlController {
 
     @PostMapping(value = "/patient/add")
     public ResponseEntity<Patient> addPatientCurl(@Valid PatientDto patientDto) {
-        log.info("save patient curl :{}{}", patientDto.getId(), patientDto.getFamily());
-        Patient patient = new Patient(patientDto.getId(), patientDto.getFamily(), patientDto.getGiven(),  LocalDate.parse(patientDto.getDob()), patientDto.getSex()
-                .equalsIgnoreCase("F") ? Gender.FEMALE : Gender.MALE, patientDto.getAddress(), patientDto.getPhone());
+        log.info("save patient curl :{} {}", patientDto.getId(), patientDto.getFamily());
+        Patient patient;
+        if (patientDto.getSex()
+                .equalsIgnoreCase("FEMALE"))
+            patient = new Patient(patientDto.getId(), patientDto.getFamily(), patientDto.getGiven(), LocalDate.parse(patientDto.getDob()), Gender.FEMALE, patientDto.getAddress(), patientDto.getPhone());
+        else
+            patient = new Patient(patientDto.getId(), patientDto.getFamily(), patientDto.getGiven(), LocalDate.parse(patientDto.getDob()), Gender.MALE, patientDto.getAddress(), patientDto.getPhone());
         return new ResponseEntity<>(patientService.savePatient(patient), CREATED);
     }
 }
