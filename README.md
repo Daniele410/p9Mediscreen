@@ -7,16 +7,18 @@ Mediscreen is an application that allows to detect a level of risk of diabetes i
 ## Technical:
 
 1.  JAVA 19
-2.  Maven
-3.  Spring Boot
-4.  Spring Data JPA
-5.  Spring Data MongoDB
-6.  MySQL
-7.  MongoDB
-8.  H2
-9.  Spring Cloud openfeign 
-10. Thymeleaf
-11. Docker
+2.  Maven 3.8.6
+3.  Spring Boot 3.0.1
+4.  Spring Data JPA 2.7.10
+5.  Spring Data MongoDB 3.4.10
+6.  MySQL 8.0
+7.  MongoDB 6.0
+8.  H2 2.1.214
+9.  Spring Cloud openfeign 4.0.2
+10. Thymeleaf 2.7.2
+11. Docker 23.0.5
+12. bootstrap 4.0.0-2
+13. Jacoco 0.8.8
 
 ---------
 
