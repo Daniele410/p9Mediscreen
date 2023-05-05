@@ -108,7 +108,7 @@
         <div class="form-group row ">
             <label class="col-sm-2 col-form-label">Address</label>
             <div class="col-sm-4">
-                <input th:field="*{address}" type="text" class="form-control" placeholder="Mandatory">
+                <input th:field="*{address}" type="text" class="form-control" placeholder="Optional">
             </div>
             <div class="col-sm-4">
                 <span class="text-danger" th:if="${#fields.hasErrors('address')}" th:errors="*{address}" ></span>
@@ -118,7 +118,7 @@
         <div class="form-group row ">
             <label class="col-sm-2 col-form-label">Phone</label>
             <div class="col-sm-4">
-                <input th:field="*{phone}" type="text" class="form-control" placeholder="Mandatory">
+                <input th:field="*{phone}" type="text" class="form-control" placeholder="Optional">
             </div>
             <div class="col-sm-4">
                 <span class="text-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span>
