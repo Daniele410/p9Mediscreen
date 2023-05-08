@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import static org.springframework.http.HttpStatus.OK;
 
+/**
+ * Controller class for testing assessment with curl commands.
+ */
 @RestController
 @RequestMapping
 public class AssessmentCurlController {
@@ -32,7 +35,7 @@ public class AssessmentCurlController {
 
 
     /**
-     * Method for curl for test assessment
+     * Method for testing assessment using curl with a patient ID.
      * @param patId
      * @return
      */
@@ -47,7 +50,7 @@ public class AssessmentCurlController {
     }
 
     /**
-     * Method for curl for test assessment
+     * Method for testing assessment using curl with a patient's familyName.
      * @param familyName
      * @return
      */

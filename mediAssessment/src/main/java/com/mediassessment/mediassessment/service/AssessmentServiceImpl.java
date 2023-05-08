@@ -10,9 +10,7 @@ import com.mediassessment.mediassessment.proxies.NoteProxy;
 import com.mediassessment.mediassessment.proxies.PatientProxy;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -20,15 +18,33 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * AssessmentServiceImpl is a class that implements IAssessmentService interface and
+ * provides methods to calculate the risk level of a patient based on their notes and demographic information.
+ */
 @Service
 public class AssessmentServiceImpl implements IAssessmentService {
 
+    /**
+     * SLF4J Logger instance.
+     */
     private static final Logger logger = LogManager.getLogger("AssessmentImpl");
 
+    /**
+     * NoteProxy instance
+     */
     private final NoteProxy noteProxy;
 
+    /**
+     * PatientProxy instance
+     */
     private final PatientProxy patientProxy;
 
+    /**
+     * Constructor for AssessmentServiceImpl.
+     * @param noteProxy
+     * @param patientProxy
+     */
     public AssessmentServiceImpl(NoteProxy noteProxy, PatientProxy patientProxy) {
         this.noteProxy = noteProxy;
         this.patientProxy = patientProxy;
@@ -36,8 +52,7 @@ public class AssessmentServiceImpl implements IAssessmentService {
 
 
     /**
-     * Get the age of the patient
-     *
+     * Get the age of the patient based on their date of birth.
      * @param patient
      * @return patient age
      */
@@ -47,17 +62,25 @@ public class AssessmentServiceImpl implements IAssessmentService {
 
 
     /**
+     * Calculates the risk level of a patient based on their age,
+     * gender, and the number of trigger terms present in their notes.
      * @param patient to calculate risk
      * @param notes   of patient
      * @return status of patient
      */
 
     public RiskLevel calculRisks(PatientBean patient, List<NoteBean> notes) {
+
+        // Calculate the number of trigger terms present in the patient's notes
         long nbTriggers = calculateTriggerTerms(notes);
+
+        // Get the patient's age
         long age = getPatientAge(patient);
+
+        // Initialize the risk level as NONE
         RiskLevel status = RiskLevel.NONE;
 
-
+        // Calculate the risk level based on the number of trigger terms and the patient's age and gender
         if ((age > 30 && nbTriggers >= 8) ||
                 (Gender.FEMALE.equals(patient.getGender()) && age < 30 && nbTriggers >= 7) ||
                 (Gender.MALE.equals(patient.getGender()) && age < 30 && nbTriggers >= 5)
@@ -77,19 +100,21 @@ public class AssessmentServiceImpl implements IAssessmentService {
     }
 
     /**
+     * Calculate the number of trigger terms in a list of notes.
      * @param notes filter notes assessment terminology
-     * @return long number of terminology
+     * @return The number of trigger terms in the notes.
      */
 
     public long calculateTriggerTerms(List<NoteBean> notes) {
 
+        // Combine all the notes into a single string, then trim and convert to uppercase
         String noteToStream = notes.stream()
                 .map(NoteBean::getMessage)
                 .map(String::trim)
                 .map(String::toUpperCase)
                 .collect(Collectors.joining());
 
-
+        // Check how many terms in the assessment terminology are found in the notes
         long nbTriggers = Arrays.stream(AssessmentTerminology.TERMINOLOGY.toArray(new String[0]))
                 .map(String::toUpperCase)
                 .filter(noteToStream::contains)
@@ -101,6 +126,7 @@ public class AssessmentServiceImpl implements IAssessmentService {
     }
 
     /**
+     * Get the riskLevel rapport for a patient based on their ID.
      * @param patientId to rapport risk level
      * @return rapport of risk level
      */
@@ -114,9 +140,9 @@ public class AssessmentServiceImpl implements IAssessmentService {
     }
 
     /**
-     * Get rapport risk whit patient familyName
+     * Get the riskLevel rapport for a patient based on their familyName
      * @param familyName
-     * @return rapport of risk level
+     * @return riskLevel rapport
      */
     @Override
     public PatientBeanDto getRapportByFamilyName(String familyName)  {

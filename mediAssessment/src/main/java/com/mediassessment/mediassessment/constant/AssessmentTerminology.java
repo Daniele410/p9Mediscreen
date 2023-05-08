@@ -4,6 +4,10 @@ import java.util.List;
 
 public class AssessmentTerminology {
 
+
+/**
+ * french  terminology to diagnostic
+ */
 //    public static List<String> TERMINOLOGY = List.of("Hémoglobine"," A1C","Microalbumine","Taille","Poids",
 //            "Fumeur","Anormal","Cholestérol","Vertige","Rechute","Reaction","Anticorps");
 
