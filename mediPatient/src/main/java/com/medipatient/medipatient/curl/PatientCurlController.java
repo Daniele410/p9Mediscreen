@@ -15,6 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDate;
 
 import static org.springframework.http.HttpStatus.CREATED;
+
+/**
+ * Controller class for testing patient with curl commands.
+ */
 @RestController
 @RequestMapping
 public class PatientCurlController {
@@ -30,10 +34,19 @@ public class PatientCurlController {
     private final IPatientService patientService;
 
 
+    /**
+     * Constructor for PatientCurlController that injects the patientService dependency.
+     * @param patientService
+     */
     public PatientCurlController(IPatientService patientService) {
         this.patientService = patientService;
     }
 
+    /**
+     * Endpoint for test adding a new patient.
+     * @param patientDto - The patient DTO containing patient details.
+     * @return The created patient object.
+     */
     @PostMapping(value = "/patient/add")
     public ResponseEntity<Patient> addPatientCurl(@Valid PatientDto patientDto) {
         log.info("save patient curl :{} {}", patientDto.getId(), patientDto.getFamily());

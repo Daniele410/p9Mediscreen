@@ -3,7 +3,6 @@ package com.medipatient.medipatient.controller;
 import com.medipatient.medipatient.Exception.PatientNotFoundException;
 import com.medipatient.medipatient.model.Patient;
 import com.medipatient.medipatient.service.IPatientService;
-import com.medipatient.medipatient.service.PatientServiceImpl;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +15,8 @@ import java.util.List;
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
 /**
- * PatientController
+ * PatientController is a REST API controller
+ * that handles HTTP requests related to patient information.
  */
 @RestController
 public class PatientController {
@@ -30,15 +30,19 @@ public class PatientController {
      */
     private final IPatientService patientService;
 
+    /**
+     * Constructor for PatientController that injects the PatientServiceImpl dependency.
+     * @param patientServiceImpl instance of IPatientService
+     */
     @Autowired
-    public PatientController(PatientServiceImpl patientServiceImpl) {
+    public PatientController(IPatientService patientServiceImpl) {
         this.patientService = patientServiceImpl;
     }
 
 
     /**
-     * method to get all patients
-     * @return all patients
+     * Retrieves a list of all patients.
+     * @return a ResponseEntity with a list of Patient objects and an HTTP status code
      */
     @GetMapping("/patients")
     public ResponseEntity<List<Patient>> getAllPatients() {
@@ -47,10 +51,10 @@ public class PatientController {
     }
 
     /**
-     *
-     * @param id
-     * @return patient
-     * @throws PatientNotFoundException
+     * Retrieves a patient by ID.
+     * @param id the ID of the patient to retrieve
+     * @return a ResponseEntity with a Patient object and an HTTP status code
+     * @throws PatientNotFoundException if the patient with the given ID is not found
      */
     @GetMapping("/patient")
     public ResponseEntity<Patient> getPatientById( @RequestParam Long id) throws PatientNotFoundException {
@@ -58,6 +62,12 @@ public class PatientController {
         return new ResponseEntity<>(patientService.findById(id), OK);
     }
 
+    /**
+     * Retrieves a patient by ID for the user interface.
+     * @param id the ID of the patient to retrieve
+     * @return a ResponseEntity with a Patient object and an HTTP status code
+     * @throws PatientNotFoundException if the patient with the given ID is not found
+     */
     @GetMapping("/patient/{id}")
     public ResponseEntity<Patient> getPatientByIdForUi(@PathVariable @RequestParam Long id) throws PatientNotFoundException {
         log.info("get patient by id :{} ", id);
@@ -65,9 +75,10 @@ public class PatientController {
     }
 
     /**
-     * put method to upload patient
-     * @param patient
-     * @return patient update
+     * Put method to upload patient
+     * @param patient the patient to update
+     * @return  ResponseEntity containing the updated patient
+     * @throws PatientNotFoundException if no patient with the given ID is found
      */
     @PutMapping("/patient")
     public ResponseEntity<Patient> updatePatient(@RequestBody @Valid Patient patient) throws PatientNotFoundException {
@@ -76,9 +87,9 @@ public class PatientController {
     }
 
     /**
-     * post method to add patient
-     * @param  patient
-     * @return patient
+     * Add a new patient to the database.
+     * @param patient the patient to add
+     * @return a ResponseEntity containing the newly added patient
      */
     @PostMapping("/patient")
     public ResponseEntity<Patient> addPatient(@RequestBody @Valid Patient patient) {
@@ -87,10 +98,10 @@ public class PatientController {
     }
 
     /**
-     * delete method to delete patient by id
-     * @param id
-     * @return OK
-     * @throws PatientNotFoundException
+     * Deletes a patient from the database.
+     * @param id the ID of the patient to delete
+     * @return a ResponseEntity containing the deleted patient
+     * @throws PatientNotFoundException if no patient with the given ID is found
      */
     @GetMapping(value = "/patientDelete/{id}")
     public ResponseEntity<Patient> deletePatient(@PathVariable long id) throws PatientNotFoundException {
@@ -100,9 +111,9 @@ public class PatientController {
 
 
     /**
-     * method to get patient by lastName
-     * @param familyName
-     * @return
+     * Retrieves a list of patients from the database that have a matching lastName.
+     * @param familyName the last name to search for
+     * @return a ResponseEntity containing a list of matching patients
      */
     @GetMapping("/patient/familyName")
     public ResponseEntity<List<Patient>> getPatientByLastName(@RequestParam String familyName) {

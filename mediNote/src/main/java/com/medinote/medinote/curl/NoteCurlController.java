@@ -15,7 +15,7 @@ import static org.springframework.http.HttpStatus.CREATED;
 
 
 /**
- * NoteCurlController
+ * Controller class for testing note with curl commands.
  */
 @RestController
 @RequestMapping
@@ -31,10 +31,19 @@ public class NoteCurlController {
      */
     private final INoteService noteService;
 
+    /**
+     * Constructor for NoteCurlController that injects the noteService dependency.
+     * @param noteService An instance of INoteService.
+     */
     public NoteCurlController(INoteService noteService) {
         this.noteService = noteService;
     }
 
+    /**
+     * POST method to create a new note.
+     * @param noteDto A Data Transfer Object containing the information needed to create the note.
+     * @return A ResponseEntity containing the created note and HTTP status code.
+     */
     @PostMapping("/patHistory/add")
     public ResponseEntity<Note> addNoteCurl(@Valid NoteDto noteDto) {
         log.info("save note curl:{} ", noteDto.getPatId());
